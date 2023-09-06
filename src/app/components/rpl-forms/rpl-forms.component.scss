@@ -10,16 +10,22 @@
 
     .form-content {
         margin: 0 2rem 4rem 2rem;
+        width: 70%;
         
         .form-main-title {
             font-size: large;
             font-weight: bold;
+
+          
+        }
+        .title-work-experience {
+                margin: 0;
         }
         .work-exp {
             display: flex;
             justify-content: space-between;
-
-          
+            align-items: center;
+            margin-bottom: 15px;
         }
 
         .experience-info-content {
@@ -35,3 +41,4 @@
     }
 
 }
+

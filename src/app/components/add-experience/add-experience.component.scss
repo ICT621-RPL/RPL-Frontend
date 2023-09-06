@@ -1,0 +1,33 @@
+.form-container {
+    padding: 0;
+    .title-container {
+        background-color: #AD202E;
+        height: 5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 30px;
+        color: #fff;
+        h2 {
+            margin: 0;
+            
+        }
+        .cross-container {
+            font-size: 1.5rem;
+        }
+    }
+
+    .form-content {
+        padding: 30px;
+        .date-container {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+}
+
+
+::ng-deep .mat-dialog-container {
+  padding: 0;
+  border-radius: none;
+}
