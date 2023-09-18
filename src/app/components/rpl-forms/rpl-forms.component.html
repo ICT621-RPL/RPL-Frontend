@@ -3,77 +3,97 @@
         <h4 class="title">Advance standing for Informal Learning</h4>
     </div>
     <div class="form-content">
-        <form>
-            <div class="form-content">
-                <div class="job-title-container mb-3">
-                    <label for="job-title" class="form-label">Job title</label>
-                    <input type="text" id="job-title" class="form-control" >
+        <form [formGroup]="form">
+            <div class="recommendations-form-container">
+                <div class="form-content">
+                <p class="form-main-title title-work-experience mb-3">Work Experiences</p>
+
+                    <div class="job-title-container mb-3">
+                        <label for="job-title" class="form-label">Job title</label>
+                        <input type="text" id="job-title" formControlName = "jobTitle"  class="form-control" [class.is-invalid]="form.get('jobTitle')?.invalid && form.get('jobTitle')?.touched" >
+                         <div *ngIf="form.get('jobTitle')?.invalid && form.get('jobTitle')?.touched" class="invalid-feedback">
+                            This field is required.
+                         </div>
+                    </div>
+                    <div class="company-container mb-3">
+                        <label for="company-name" class="form-label">Name of the Company</label>
+                        <input  type="text" id="company-name" class="form-control" [class.is-invalid]="form.get('jobTitle')?.invalid && form.get('jobTitle')?.touched" >
+                         <div *ngIf="form.get('jobTitle')?.invalid && form.get('jobTitle')?.touched" class="invalid-feedback">
+                            This field is required.
+                         </div>
+                    </div>
+                    <div class="country-container mb-3">
+                        <label for="country-name" class="form-label">Country</label>
+                        <input  type="text" id="country-name" class="form-control" [class.is-invalid]="form.get('jobTitle')?.invalid && form.get('jobTitle')?.touched">
+                        <div *ngIf="form.get('jobTitle')?.invalid && form.get('jobTitle')?.touched" class="invalid-feedback">
+                            This field is required.
+                         </div>
+                    </div>
+                    <div class="from-date-container mb-3">
+                        <label for="month-date" class="form-label">From</label>
+                        <div class="date-container">
+                            <div class="month-container">
+                                <select id="monthSelect" class="form-select">
+                                    <option *ngFor="let month of months" [value]="month">{{ month }}</option>
+                                </select>
+                            </div>
+                            <div class="year-container ml-2">
+                                  <select id="monthSelect" class="form-select">
+                                    <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+                                </select>
+                            </div>
+                        </div>
                 </div>
-                <div class="company-container mb-3">
-                    <label for="company-name" class="form-label">Name of the Company</label>
-                    <input  type="text" id="company-name" class="form-control" >
-                </div>
-                <div class="country-container mb-3">
-                    <label for="country-name" class="form-label">Country</label>
-                    <input  type="text" id="country-name" class="form-control" >
-                </div>
-                <div class="from-date-container mb-3">
-                    <label for="month-date" class="form-label">From</label>
+                <div class="to-date-container mb-3">
+                    <label for="to-date" class="form-label">To</label>
                     <div class="date-container">
                         <div class="month-container">
-                            <input  type="text" id="month-date" class="form-control" >
+                            <select id="monthSelect" class="form-select">
+                                    <option *ngFor="let month of months" [value]="month">{{ month }}</option>
+                            </select>
                         </div>
-                        <div class="year-container ml-2">
-                            <input  type="text" id="year-date" class="form-control" >
-                        </div>
-                    </div>
-            </div>
-            <div class="to-date-container mb-3">
-                <label for="to-date" class="form-label">To</label>
-                <div class="date-container">
-                    <div class="month-container">
-                        <input  type="text" id="to-date" class="form-control" >
-                    </div>
-                    <div class="year-container  ml-2">
-                        <input  type="text" id="to-date" class="form-control" >
-                    </div>
-                </div>
-            </div>
-            <div class="description-container mb-5">
-                    <!-- <quill-editor class="content-editor" [(ngModel)]="editorContent"
-                            [readOnly]="false"
-                            [theme]="'snow'"
-                            [modules]="modules"
-                            [formats]="formats"
-                            [placeholder]="'Enter text...'"> </quill-editor> -->
-            </div>
-            <div class="submission-btn-container mt-3">
-                <button type="button" class="btn btn-secondary">Cancel</button>
-                <button type="button" class="btn btn-primary ml-3">Submit</button>
-            </div>
-        </div>
-            <div class="work-experience mt-5">
-                <div class="work-exp"> 
-                <p class="form-main-title title-work-experience">Work Experiences</p>
-                <button class="btn btn-secondary" type="button" (click)="openModal()">
-                    <i class="bi bi-plus"></i> 
-                    Add Experience
-                </button>
-                </div>
-                <div class="experience-info-content">
-                    <div class="no-experience">
-                        <div class="text-center">
-                            <h2 class="text-black-50">No Experiences Registered!</h2>
-                            <p>You can add your own experiences using + button on your right</p>
+                        <div class="year-container  ml-2">
+                            <select id="monthSelect" class="form-select">
+                                    <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+                            </select>
                         </div>
                     </div>
                 </div>
-                <div class="form-submission-btn-container mt-5">
+                <div class="description-container mb-5">
+                        <!-- <quill-editor class="content-editor" [(ngModel)]="editorContent"
+                                [readOnly]="false"
+                                [theme]="'snow'"
+                                [modules]="modules"
+                                [formats]="formats"
+                                [placeholder]="'Enter text...'"> </quill-editor> -->
+                </div>
+               
+                </div>
+                <div class="work-experience mt-5">
+                    <div class="work-exp">
+                    </div>
+                    <div class="experience-info-content">
+                        <div class="no-experience">
+                            <div class="text-center">
+                                <h2 class="text-black-50"><i class="bi bi-info-circle mr-2"></i>No Recommedations Registered!</h2>
+                                <p>Add work experiences for course recommendations applying RPL</p>
+                            </div>
+                             
+                        </div>
+                        <div class="submission-btn-container mt-3">
+                                <button type="button" class="btn btn-generate"><span class="mr-1">Generate</span>  <i class="bi bi-airplane-engines-fill"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-submission-btn-container mt-5">
+                    <button type="submit" class="btn btn-secondary mr-3">
+                            Add Experiences<i class="bi bi-plus"></i>
+                    </button>
                     <button type="submit" class="btn btn-primary">
                         Next <i class="bi bi-arrow-right"></i>
                     </button>
                 </div>
-            </div>
         </form>
     </div>
 </div>

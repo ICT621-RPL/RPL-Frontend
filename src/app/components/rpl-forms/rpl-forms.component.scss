@@ -1,3 +1,9 @@
+.recommendations-form-container {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    gap: 20px; 
+
+}
 .form-container {
     padding-bottom: 2rem;
     .title-container {
@@ -11,13 +17,10 @@
 
     .form-content {
         margin: 0 2rem 4rem 2rem;
-        width: 70%;
         
         .form-main-title {
             font-size: large;
             font-weight: bold;
-
-          
         }
         .title-work-experience {
                 margin: 0;
@@ -31,6 +34,16 @@
 
         .month-container, .year-container {
             width: 100%;
+        }
+
+        .submission-btn-container{
+            .btn.btn-generate {
+                background-color: #007d86;
+                border-color: #007d86;
+                color: #fff;
+                width: 100%;
+            }
+
         }
           .date-container {
             display: flex;
@@ -55,9 +68,11 @@
                 background-color: #ad202e; // Change to your desired color
                 border-color: #ad202e;
                 color: #FFF;
-
-
-            
+             }
+            .btn.btn-secondary {
+                background-color: #3d3a3a; // Change to your desired color
+                border-color: #3d3a3a;
+                color: #FFF;
              }
         }
     }
