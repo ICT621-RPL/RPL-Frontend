@@ -29,6 +29,14 @@
             margin-bottom: 15px;
         }
 
+        .month-container, .year-container {
+            width: 100%;
+        }
+          .date-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
         .experience-info-content {
                 .no-experience {
                     background-color: #F9F9F9;

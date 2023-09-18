@@ -10,6 +10,9 @@ import { AddExperienceComponent } from './components/add-experience/add-experien
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+// import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [
@@ -20,11 +23,15 @@ import {MatDialogModule} from '@angular/material/dialog'
     AddExperienceComponent
   ],
   imports: [
-    BrowserModule,
+  BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule,
     AppRoutingModule,
     NgbModule,
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    // QuillModule
   ],
   providers: [],
   bootstrap: [AppComponent]
