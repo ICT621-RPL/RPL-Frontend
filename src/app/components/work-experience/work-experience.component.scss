@@ -46,6 +46,10 @@
                 }
         }
 
+       .description-container {
+            height: 20rem;
+       }
+
         .form-submission-btn-container {
             display: flex;
             justify-content: flex-end;
@@ -59,6 +63,18 @@
                 border-color: #3d3a3a;
                 color: #FFF;
              }
+        }
+
+        .country-company-container {
+            display: flex;
+            justify-content: space-between;
+
+            .country-container {
+                width: 100%;
+            }
+            .company-container {
+                width: 100%;
+            }
         }
 
 }

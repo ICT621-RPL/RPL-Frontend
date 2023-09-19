@@ -12,6 +12,7 @@ import {MatDialogModule} from '@angular/material/dialog'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { WorkExperienceComponent } from './components/work-experience/work-experience.component';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { WorkExperienceComponent } from './components/work-experience/work-exper
     WorkExperienceComponent
   ],
   imports: [
-  BrowserModule,
+    BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
@@ -30,7 +31,7 @@ import { WorkExperienceComponent } from './components/work-experience/work-exper
     NgbModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    // QuillModule
+    QuillModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

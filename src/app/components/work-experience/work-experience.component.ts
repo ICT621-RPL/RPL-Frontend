@@ -12,6 +12,15 @@ export class WorkExperienceComponent implements OnInit {
   months: string[]= []
   years: number[] = [];
   public closeResult = '';
+  
+   quillConfig={
+    toolbar: {
+      container: [
+        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+        ['link'],
+      ],
+    }};
+      
   constructor(private fb: FormBuilder) { 
       
       const currentYear = new Date().getFullYear();
