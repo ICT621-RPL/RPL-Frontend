@@ -1,0 +1,78 @@
+    <form [formGroup]="expForm">          
+
+<div class="recommendations-form-container">
+        <div class="form-content">
+                    <div class="job-title-container mb-3">
+                        <label for="job-title" class="form-label">Job title</label>
+                        <input type="text" id="job-title" formControlName = "jobTitle"  class="form-control" [class.is-invalid]="expForm.get('jobTitle')?.invalid && expForm.get('jobTitle')?.touched" >
+                         <div *ngIf="expForm.get('jobTitle')?.invalid && expForm.get('jobTitle')?.touched" class="invalid-feedback">
+                            This field is required.
+                         </div>
+                    </div>
+                    <div class="company-container mb-3">
+                        <label for="company-name" class="form-label">Name of the Company</label>
+                        <input  type="text" id="company-name" class="form-control" [class.is-invalid]="expForm.get('jobTitle')?.invalid && expForm.get('jobTitle')?.touched" >
+                         <div *ngIf="expForm.get('jobTitle')?.invalid && expForm.get('jobTitle')?.touched" class="invalid-feedback">
+                            This field is required.
+                         </div>
+                    </div>
+                    <div class="country-container mb-3">
+                        <label for="country-name" class="form-label">Country</label>
+                        <input  type="text" id="country-name" class="form-control" [class.is-invalid]="expForm.get('jobTitle')?.invalid && expForm.get('jobTitle')?.touched">
+                        <div *ngIf="expForm.get('jobTitle')?.invalid && expForm.get('jobTitle')?.touched" class="invalid-feedback">
+                            This field is required.
+                         </div>
+                    </div>
+                    <div class="from-date-container mb-3">
+                        <label for="month-date" class="form-label">From</label>
+                        <div class="date-container">
+                            <div class="month-container">
+                                <select id="monthSelect" class="form-select">
+                                    <option *ngFor="let month of months" [value]="month">{{ month }}</option>
+                                </select>
+                            </div>
+                            <div class="year-container ml-2">
+                                  <select id="monthSelect" class="form-select">
+                                    <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+                                </select>
+                            </div>
+                        </div>
+                </div>
+                <div class="to-date-container mb-3">
+                    <label for="to-date" class="form-label">To</label>
+                    <div class="date-container">
+                        <div class="month-container">
+                            <select id="monthSelect" class="form-select">
+                                    <option *ngFor="let month of months" [value]="month">{{ month }}</option>
+                            </select>
+                        </div>
+                        <div class="year-container  ml-2">
+                            <select id="monthSelect" class="form-select">
+                                    <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="description-container mb-5">
+                       
+                </div>
+               
+                </div>
+                <div class="work-experience mt-4 ml-3 ">
+                
+                    <div class="experience-info-content ">
+                        <div class="no-experience p-2">
+                            <div class="text-center">
+                                <h2 class="text-black-50"><i class="bi bi-info-circle mr-2"></i>No Recommedations Registered!</h2>
+                                <p>Add work experiences for course recommendations applying RPL</p>
+                            </div>
+                             
+                        </div>
+                        <div class="submission-btn-container mt-3">
+                                <button type="button" class="btn btn-generate"><span class="mr-1">Generate</span>  <i class="bi bi-airplane-engines-fill"></i></button>
+                        </div>
+                    </div>
+                </div>
+               
+</div>
+</form>

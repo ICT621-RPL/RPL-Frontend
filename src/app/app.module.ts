@@ -6,13 +6,12 @@ import { AppComponent } from './app.component';
 import { RplFormsComponent } from './components/rpl-forms/rpl-forms.component';
 import { MurdochNavbarComponent } from './components/murdoch-navbar/murdoch-navbar.component';
 import { MurdochFooterComponent } from './components/murdoch-footer/murdoch-footer.component';
-import { AddExperienceComponent } from './components/add-experience/add-experience.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-// import { QuillModule } from 'ngx-quill';
+import { WorkExperienceComponent } from './components/work-experience/work-experience.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +19,7 @@ import { CommonModule } from '@angular/common';
     RplFormsComponent,
     MurdochNavbarComponent,
     MurdochFooterComponent,
-    AddExperienceComponent
+    WorkExperienceComponent
   ],
   imports: [
   BrowserModule,
