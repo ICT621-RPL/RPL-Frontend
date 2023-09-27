@@ -13,14 +13,20 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { WorkExperienceComponent } from './components/work-experience/work-experience.component';
 import { QuillModule } from 'ngx-quill';
-
+import { HttpClientModule } from '@angular/common/http';
+import { DndDirective } from './components/dnd.directive';
+import { ProgressComponent } from './components/progress/progress.component';
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
 @NgModule({
   declarations: [
     AppComponent,
     RplFormsComponent,
     MurdochNavbarComponent,
     MurdochFooterComponent,
-    WorkExperienceComponent
+    WorkExperienceComponent,
+    DndDirective,
+    ProgressComponent,
+    FileUploadComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +37,8 @@ import { QuillModule } from 'ngx-quill';
     NgbModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    QuillModule.forRoot()
+    QuillModule.forRoot(),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

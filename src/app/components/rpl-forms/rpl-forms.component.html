@@ -9,8 +9,10 @@
                     <ng-container formArrayName="formGroups">
 
                     <ng-container *ngFor="let control of formArray.controls; let i = index">
-                        <app-work-experience [expForm]="control"></app-work-experience>
-                        <hr>
+                        <div class="mb-3">
+                            <app-work-experience [expForm]="control"></app-work-experience>
+                        </div>
+                        <div class="devicer"></div>
                     </ng-container>
                 </ng-container>
 
@@ -18,7 +20,7 @@
                                 <button type="button" (click)="onAddFormGroup()" class="btn btn-secondary mr-3">
                                         Add Experiences<i class="bi bi-plus"></i>
                                 </button>
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" (click)="onSubmitFormGroup()" >
                                     Next <i class="bi bi-arrow-right"></i>
                                 </button>
                             </div>
