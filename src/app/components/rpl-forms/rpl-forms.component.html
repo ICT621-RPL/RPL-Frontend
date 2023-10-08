@@ -1,20 +1,13 @@
 <div class="form-container">
-    <div class="title-container">
-        <h4 class="title">Advance standing for Informal Learning</h4>
-    </div>
     <div class="form-content">
-                    <p class="form-main-title title-work-experience mb-3">Work Experiences</p>
+                    <h2 class="fw-bold title-work-experience mb-3">Work Experiences</h2>
         <form [formGroup]="form">
-
-                    <ng-container formArrayName="formGroups">
-
                     <ng-container *ngFor="let control of formArray.controls; let i = index">
                         <div class="mb-3">
                             <app-work-experience [expForm]="control" [indexForm]="i" (onDelete)="onDeleteForm($event)"></app-work-experience>
                         </div>
                         <div class="devicer"></div>
                     </ng-container>
-                </ng-container>
 
                         <div class="form-submission-btn-container mt-5">
                                 <button type="button" (click)="onAddFormGroup()" class="btn btn-secondary mr-3">

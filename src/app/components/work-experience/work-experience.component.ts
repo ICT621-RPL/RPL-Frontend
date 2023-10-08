@@ -27,6 +27,7 @@ export class WorkExperienceComponent implements OnInit, OnChanges {
   public recommendations: Array<{experience_id: number, is_applied: number, selected?: boolean, recommendation_id: number, recommendation_unit_code: string}> = [];
   public isLoading = false;
   public experienceId: number = 0;
+  public itemLoading: boolean = false;
   public httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -80,7 +81,9 @@ export class WorkExperienceComponent implements OnInit, OnChanges {
   }
 
   onContentChange(value): void {
-    this.expForm.controls['description'].setValue(value.text);
+    console.log(value);
+    this.expForm.controls['description'].setValue(value.text.replace(/\n/g, ''));
+    console.log(this.expForm.value);
   }
 
 
@@ -91,7 +94,6 @@ export class WorkExperienceComponent implements OnInit, OnChanges {
       .subscribe(
         (data: any) => {
           this.experienceId = data?.experience_id
-          this.isLoading = false;
           this.setRecommendations(data);
         },
         (err) => console.log(err)
@@ -104,6 +106,10 @@ export class WorkExperienceComponent implements OnInit, OnChanges {
   }
 
   public setRecommendations(data): void {
+      this.itemLoading = true;
+      setTimeout(()=> {
+        this.itemLoading = false;
+      }, 2000)
       data.recommendations.forEach((recommendation) => recommendation.selected = false)
       this.recommendations = data.recommendations
   }
@@ -121,7 +127,6 @@ export class WorkExperienceComponent implements OnInit, OnChanges {
     }
     control.setValue(recommendations);
     this.isAllSelected = this.recommendations.every(recommendation => recommendation.selected)
-    console.log(this.isAllSelected);
     this.isIndeterminate = this.recommendations.some(item => item.selected) && !this.isAllSelected;
   }
 

@@ -17,6 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { DndDirective } from './components/dnd.directive';
 import { ProgressComponent } from './components/progress/progress.component';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
+import { UploadDocumentsComponent } from './components/upload-documents/upload-documents.component';
+import { SubmitSuccessComponent } from './components/submit-success/submit-success.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +28,9 @@ import { FileUploadComponent } from './components/file-upload/file-upload.compon
     WorkExperienceComponent,
     DndDirective,
     ProgressComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    UploadDocumentsComponent,
+    SubmitSuccessComponent
   ],
   imports: [
     BrowserModule,

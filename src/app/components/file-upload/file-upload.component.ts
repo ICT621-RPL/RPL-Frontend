@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-file-upload',
@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FileUploadComponent implements OnInit {
 
+  @Output() uploadedFiles: EventEmitter<any> = new EventEmitter();
+  @Output() uploading: EventEmitter<any> = new EventEmitter();
   files: any[] = [];
 
   constructor() { }
@@ -39,22 +41,22 @@ export class FileUploadComponent implements OnInit {
   /**
    * Simulate the upload process
    */
-  uploadFilesSimulator(index: number) {
-    setTimeout(() => {
-      if (index === this.files.length) {
-        return;
-      } else {
-        const progressInterval = setInterval(() => {
-          if (this.files[index].progress === 100) {
-            clearInterval(progressInterval);
-            this.uploadFilesSimulator(index + 1);
-          } else {
-            this.files[index].progress += 5;
-          }
-        }, 200);
-      }
-    }, 1000);
-  }
+  // uploadFilesSimulator(index: number) {
+  //   setTimeout(() => {
+  //     if (index === this.files.length) {
+  //       return;
+  //     } else {
+  //       const progressInterval = setInterval(() => {
+  //         if (this.files[index].progress === 100) {
+  //           clearInterval(progressInterval);
+  //           this.uploadFilesSimulator(index + 1);
+  //         } else {
+  //           this.files[index].progress += 5;
+  //         }
+  //       }, 200);
+  //     }
+  //   }, 1000);
+  // }
 
   /**
    * Convert Files list to normal array list
@@ -65,7 +67,8 @@ export class FileUploadComponent implements OnInit {
       item.progress = 0;
       this.files.push(item);
     }
-    this.uploadFilesSimulator(0);
+    this.uploadedFiles.emit(this.files);
+    this.uploadFilesSimulator();
   }
 
  
@@ -79,4 +82,42 @@ export class FileUploadComponent implements OnInit {
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
+
+
+
+
+uploadFilesSimulator() {
+  // Loop through all files
+  for (let index = 0; index < this.files.length; index++) {
+    // Start the upload simulation for each file
+    this.simulateFileUpload(index);
+  }
+}
+
+simulateFileUpload(index: number) {
+  // Assuming network speed is 1000 KB/s
+  const networkSpeed = 700000; 
+  const fileSize = this.files[index].size; 
+  const uploadTime = (fileSize / networkSpeed) * 1000;
+  const updateInterval = 200; 
+  const progressIncrement = (updateInterval / uploadTime) * 100; 
+  
+  this.files[index].progress = 0;
+  this.uploading.emit(true)
+  // Simulate file upload
+  const progressInterval = setInterval(() => {
+
+    if (this.files[index].progress >= 100) {
+      clearInterval(progressInterval); 
+        this.uploading.emit(false)
+    } else {
+      this.files[index].progress += progressIncrement; 
+      if (this.files[index].progress > 100) {
+        this.files[index].progress = 100;
+      }
+    }
+  }, updateInterval);
+
+}
+
 }

@@ -1,0 +1,13 @@
+<div class="mt-3">
+                <label  class="form-label">Experices Certificates 
+                    <span data-bs-toggle="tooltip" data-bs-placement="top" [title]="experienceUploadInfo"><i class="bi bi-info-circle" ></i>
+                    </span>
+                    </label>
+                    <app-file-upload (uploadedFiles)="uploadedFiles($event)" (uploading)="uploadingDocument($event)" ></app-file-upload>
+
+                  <div class="d-flex justify-content-end mt-5 mb-5">
+                                <button class="btn btn-primary" (click)="onSubmit()" [disabled]="isUploading">
+                                    Submit <i class="bi bi-arrow-right"></i>
+                                </button>
+                            </div>
+</div>

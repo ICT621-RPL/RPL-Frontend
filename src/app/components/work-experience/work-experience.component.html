@@ -100,7 +100,15 @@
                         </div>
                         
                         <div class="table-responsive" *ngIf="recommendations.length > 0">
-                            <table class="table table-responsive table-borderless">
+                            <div class="no-experience p-2" *ngIf="itemLoading" >
+                                 <div class="text-center">
+                                    <div class="spinner">
+                                    <div class="dot1"></div>
+                                    <div class="dot2"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <table class="table table-responsive table-borderless"  *ngIf="!itemLoading">
                             <thead>
                                 <tr class="bg-light">
                                     <th scope="col" width="5%">
@@ -122,7 +130,7 @@
                         </table>
                 </div>
                         <div class="submission-btn-container mt-3">
-                            <button type="button" class="btn btn-generate" (click)="onSubmitForm()">
+                            <button type="button" [disabled]="!expForm.valid" class="btn btn-generate" (click)="onSubmitForm()">
                                 <span class="mr-1">Generate</span> 
                                 <div class="spinner-border" role="status" *ngIf="isLoading"></div> 
                                  <i class="bi bi-airplane-engines-fill" *ngIf="!isLoading"></i>
@@ -134,16 +142,5 @@
                         </div>
                     </div>
                 </div>
-               
-                
-
-
-            <div class="mt-3">
-                <label  class="form-label">Experices Certificates 
-                    <span data-bs-toggle="tooltip" data-bs-placement="top" [title]="experienceUploadInfo"><i class="bi bi-info-circle" ></i>
-                    </span>
-                    </label>
-                <app-file-upload></app-file-upload>
-            </div>
     </div>
 </form>

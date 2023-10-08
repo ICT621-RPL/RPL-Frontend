@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import {MatDialog} from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { FormBuilder,  Validators, FormArray } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-rpl-forms',
@@ -13,7 +14,14 @@ export class RplFormsComponent implements OnInit {
   months: string[]= []
   years: number[] = [];
 
-  formFields ={
+  public formFields;
+  public form = this.fb.group({
+        formArray: this.fb.array([
+        ])
+      });
+  public closeResult = '';
+  constructor(private fb: FormBuilder, private router: Router) { 
+    this.formFields ={
       jobTitle: ['', Validators.required],
       company: ['', Validators.required],
       country: ['', Validators.required],
@@ -22,14 +30,8 @@ export class RplFormsComponent implements OnInit {
       to_month: ['', Validators.required],
       to_year: ['', Validators.required],
       description: ['', Validators.required],
-      courses: [[], Validators.required]
+      courses: [[]]
     }
-  public form = this.fb.group({
-        formArray: this.fb.array([
-        ])
-      });
-  public closeResult = '';
-  constructor(private fb: FormBuilder) { 
      this.formArray.push(this.fb.group(this.formFields));
   }
 
@@ -53,7 +55,7 @@ export class RplFormsComponent implements OnInit {
   }
 
   public onSubmitFormGroup(): void {
-    console.log(this.formArray.value)
+    this.router.navigate(['/upload'])
   }
   
 
