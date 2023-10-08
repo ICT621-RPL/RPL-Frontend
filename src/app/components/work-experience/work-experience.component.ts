@@ -3,10 +3,12 @@ import {
   Component,
   ElementRef,
   Input,
+  Output,
   OnChanges,
   OnInit,
   SimpleChanges,
-  ViewChild
+  ViewChild,
+  EventEmitter
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
@@ -18,9 +20,13 @@ import { HttpHeaders } from '@angular/common/http';
   styleUrls: ['./work-experience.component.scss'],
 })
 export class WorkExperienceComponent implements OnInit, OnChanges {
+  @Output() onDelete: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild('fileInput') fileInput: ElementRef ;
-   @Input() expForm: any;
+  @Input() expForm: any;
+  @Input() indexForm: number;
+  public recommendations: Array<{experience_id: number, is_applied: number, selected?: boolean, recommendation_id: number, recommendation_unit_code: string}> = [];
   public isLoading = false;
+  public experienceId: number = 0;
   public httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -33,7 +39,8 @@ export class WorkExperienceComponent implements OnInit, OnChanges {
   years: number[] = [];
   public closeResult = '';
   selectedFiles: File[] = [];
-
+  isAllSelected: boolean = false;
+  isIndeterminate: boolean = false;
   quillConfig = {
     toolbar: {
       container: [[{ list: 'ordered' }, { list: 'bullet' }], ['link']],
@@ -65,28 +72,73 @@ export class WorkExperienceComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.expForm.valueChanges.subscribe((value: any) => {
-      console.log(value);
     });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    changes;
+    
+  }
+
+  onContentChange(value): void {
+    this.expForm.controls['description'].setValue(value.text);
   }
 
 
-
   public onSubmitForm(): void {
-    console.log(this.expForm.value);
     this.isLoading = true;
     this.http
       .post(this.api + 'experience', { studentId: 1, ...this.expForm.value })
       .subscribe(
-        (data) => {
-          console.log(data);
+        (data: any) => {
+          this.experienceId = data?.experience_id
           this.isLoading = false;
+          this.setRecommendations(data);
         },
         (err) => console.log(err)
       );
     this.isLoading = false;
   }
+
+  public onDeleteForm(): void {
+    this.onDelete.emit({index: this.indexForm, experienceId: this.experienceId})
+  }
+
+  public setRecommendations(data): void {
+      data.recommendations.forEach((recommendation) => recommendation.selected = false)
+      this.recommendations = data.recommendations
+  }
+
+  public onSelectRecommendation(event, courseId): void {
+    const control  = this.expForm.get('courses');
+    const recommendations = control.value;
+    const course = this.recommendations.filter(recommendation => recommendation.recommendation_unit_code === courseId)
+    course[0].selected = event.target.checked
+    if(event.target.checked) {
+      recommendations.push(courseId)
+    }
+    else {
+      recommendations.pop(courseId)
+    }
+    control.setValue(recommendations);
+    this.isAllSelected = this.recommendations.every(recommendation => recommendation.selected)
+    console.log(this.isAllSelected);
+    this.isIndeterminate = this.recommendations.some(item => item.selected) && !this.isAllSelected;
+  }
+
+  public onSelectAll(event, recommendations): void {
+    this.isIndeterminate = false;
+    const control  = this.expForm.get('courses');
+    this.isAllSelected = event.target.checked
+    for(let recommendation of recommendations) {
+        recommendation.selected = this.isAllSelected;
+    }
+    if(this.isAllSelected) {
+     
+      control.setValue(recommendations.map((r)=> r.recommendation_unit_code ))
+    }
+    else {
+     control.setValue([])
+    }
+  }
+
 }

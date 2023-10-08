@@ -22,6 +22,7 @@ export class RplFormsComponent implements OnInit {
       to_month: ['', Validators.required],
       to_year: ['', Validators.required],
       description: ['', Validators.required],
+      courses: [[], Validators.required]
     }
   public form = this.fb.group({
         formArray: this.fb.array([
@@ -55,4 +56,13 @@ export class RplFormsComponent implements OnInit {
     console.log(this.formArray.value)
   }
   
+
+  public onDeleteForm(ids): void {
+    if(this.formArray.length > 1) {
+      this.formArray.removeAt(ids.index);
+    }
+    if(ids.experienceId) {
+      console.log("deelete")
+    }
+  }
 }

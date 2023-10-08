@@ -10,7 +10,7 @@
 
                     <ng-container *ngFor="let control of formArray.controls; let i = index">
                         <div class="mb-3">
-                            <app-work-experience [expForm]="control"></app-work-experience>
+                            <app-work-experience [expForm]="control" [indexForm]="i" (onDelete)="onDeleteForm($event)"></app-work-experience>
                         </div>
                         <div class="devicer"></div>
                     </ng-container>
