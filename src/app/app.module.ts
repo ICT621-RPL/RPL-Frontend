@@ -20,7 +20,6 @@ import { FileUploadComponent } from './components/file-upload/file-upload.compon
 import { UploadDocumentsComponent } from './components/upload-documents/upload-documents.component';
 import { SubmitSuccessComponent } from './components/submit-success/submit-success.component';
 import { ToastrModule } from 'ngx-toastr';
-
 @NgModule({
   declarations: [
     AppComponent,
