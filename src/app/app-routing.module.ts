@@ -6,9 +6,7 @@ import { SubmitSuccessComponent } from './components/submit-success/submit-succe
 import { MsalGuard } from '@azure/msal-angular';
 
 const routes: Routes = [
-  { path: '', component: RplFormsComponent, canActivate: [
-      MsalGuard
-    ]},
+  { path: '', component: RplFormsComponent, canActivate: [MsalGuard]},
   { path: 'upload', component: UploadDocumentsComponent, pathMatch: 'full'  },
   { path: 'submit', component: SubmitSuccessComponent },
   { path: '', redirectTo: '/', pathMatch: 'full' } // redirect to `home` component

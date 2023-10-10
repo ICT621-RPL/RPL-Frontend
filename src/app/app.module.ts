@@ -19,8 +19,9 @@ import { ProgressComponent } from './components/progress/progress.component';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { UploadDocumentsComponent } from './components/upload-documents/upload-documents.component';
 import { SubmitSuccessComponent } from './components/submit-success/submit-success.component';
-import { MSAL_GUARD_CONFIG, MSAL_INSTANCE, MSAL_INTERCEPTOR_CONFIG, MsalBroadcastService, MsalGuard, MsalGuardConfiguration, MsalInterceptor, MsalInterceptorConfiguration, MsalModule, MsalRedirectComponent, MsalService } from '@azure/msal-angular';
 import { BrowserCacheLocation, IPublicClientApplication, InteractionType, LogLevel, PublicClientApplication } from '@azure/msal-browser';
+import { ToastrModule } from 'ngx-toastr';
+import { MsalGuardConfiguration, MsalInterceptorConfiguration } from '@azure/msal-angular';
 
 const isIE = window.navigator.userAgent.indexOf("MSIE ") > -1 || window.navigator.userAgent.indexOf("Trident/") > -1;
 
@@ -91,29 +92,10 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MatDialogModule,
     QuillModule.forRoot(),
     HttpClientModule,
-    MsalModule,
-
+    ToastrModule.forRoot(), 
   ],
-  providers: [ {
-      provide: HTTP_INTERCEPTORS,
-      useClass: MsalInterceptor,
-      multi: true
-    },
-    {
-      provide: MSAL_INSTANCE,
-      useFactory: MSALInstanceFactory
-    },
-    {
-      provide: MSAL_GUARD_CONFIG,
-      useFactory: MSALGuardConfigFactory
-    },
-    {
-      provide: MSAL_INTERCEPTOR_CONFIG,
-      useFactory: MSALInterceptorConfigFactory
-    },
-    MsalService,
-    MsalGuard,
-    MsalBroadcastService],
-  bootstrap: [AppComponent, MsalRedirectComponent]
+  providers: [ 
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

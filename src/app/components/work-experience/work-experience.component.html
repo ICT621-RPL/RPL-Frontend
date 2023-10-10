@@ -3,7 +3,7 @@
 <div class="recommendations-form-container">
         <div class="form-content">
                     <div class="job-title-container mb-3">
-                        <label for="job-title" class="form-label">Job title</label>
+                        <label for="job-title" class="form-label">Job title *</label>
                         <input type="text" id="job-title" formControlName = "jobTitle"  class="form-control" [class.is-invalid]="expForm.get('jobTitle')?.invalid && expForm.get('jobTitle')?.touched" >
                          <div *ngIf="expForm.get('jobTitle')?.invalid && expForm.get('jobTitle')?.touched" class="invalid-feedback">
                             This field is required.
@@ -11,14 +11,14 @@
                     </div>
                     <div class="country-company-container mb-3">
                         <div class="company-container mr-2">
-                            <label for="company-name" class="form-label">Name of the Company</label>
+                            <label for="company-name" class="form-label">Name of the Company *</label>
                             <input  type="text" formControlName="company" id="company-name" class="form-control" [class.is-invalid]="expForm.get('company')?.invalid && expForm.get('company')?.touched" >
                             <div *ngIf="expForm.get('company')?.invalid && expForm.get('company')?.touched" class="invalid-feedback">
                                 This field is required.
                             </div>
                         </div>
                         <div class="country-container ">
-                            <label for="country-name" class="form-label">Country</label>
+                            <label for="country-name" class="form-label">Country *</label>
                             <input  type="text" formControlName="country" id="country-name" class="form-control" [class.is-invalid]="expForm.get('country')?.invalid && expForm.get('country')?.touched">
                             <div *ngIf="expForm.get('country')?.invalid && expForm.get('country')?.touched" class="invalid-feedback">
                                 This field is required.
@@ -27,7 +27,7 @@
                     </div>
 
                     <div class="from-date-container mb-3">
-                        <label for="month-date" class="form-label">From</label>
+                        <label for="month-date" class="form-label">From *</label>
                         <div class="date-container">
                             <div class="month-container">
                                 <select id="monthSelect" class="form-select" formControlName="from_month" [class.is-invalid]="expForm.get('from_month')?.invalid && expForm.get('from_month')?.touched">
@@ -53,11 +53,11 @@
                    
                     <div class="to-date-container mb-3">
                         
-                    <label for="to-date" class="form-label" >To</label>
+                    <label for="to-date" class="form-label" >To *</label>
                     <div class="date-container">
                         <div class="month-container">
                             <select id="monthSelect" class="form-select" formControlName="to_month"  [class.is-invalid]="expForm.get('to_month')?.invalid && expForm.get('to_month')?.touched">
-                                <option value="" disabled selected>Month</option>    
+                                <option value="" disabled selected>Month </option>    
                                 <option *ngFor="let month of months" [value]="month">{{ month }}</option>
                             </select>
                                <div *ngIf="expForm.get('to_month')?.invalid && expForm.get('to_month')?.touched" class="invalid-feedback">
@@ -66,7 +66,7 @@
                         </div>
                         <div class="year-container  ml-2">
                             <select id="monthSelect" class="form-select" formControlName="to_year" [class.is-invalid]="expForm.get('to_year')?.invalid && expForm.get('to_year')?.touched">
-                                <option value="" disabled selected>Year</option>  
+                                <option value="" disabled selected>Year </option>  
                                 <option *ngFor="let year of years" [value]="year">{{ year }}</option>
                             </select>
                                <div *ngIf="expForm.get('to_year')?.invalid && expForm.get('to_year')?.touched" class="invalid-feedback">
@@ -76,7 +76,7 @@
                     </div>
                     </div>
                     <div class="description-container mt-4 mb-5">
-                        <label for="description" class="form-label">Description</label>
+                        <label for="description" class="form-label">Description *</label>
                         <quill-editor class="quill-editor"
                                         id="description"
                                         placeholder="Share your experience"
