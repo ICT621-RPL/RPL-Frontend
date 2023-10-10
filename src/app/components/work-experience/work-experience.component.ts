@@ -13,6 +13,7 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { HttpHeaders } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-work-experience',
@@ -48,7 +49,7 @@ export class WorkExperienceComponent implements OnInit, OnChanges {
     },
   };
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {
+  constructor(private fb: FormBuilder, private http: HttpClient, private toastr: ToastrService) {
     const currentYear = new Date().getFullYear();
     const startYear = 1980;
     for (let year = currentYear; year >= startYear; year--) {
@@ -109,6 +110,8 @@ export class WorkExperienceComponent implements OnInit, OnChanges {
       this.itemLoading = true;
       setTimeout(()=> {
         this.itemLoading = false;
+        this.toastr.info("You can select multiple courses to apply RPL.")
+
       }, 2000)
       data.recommendations.forEach((recommendation) => recommendation.selected = false)
       this.recommendations = data.recommendations

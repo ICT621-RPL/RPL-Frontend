@@ -19,6 +19,7 @@ import { ProgressComponent } from './components/progress/progress.component';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { UploadDocumentsComponent } from './components/upload-documents/upload-documents.component';
 import { SubmitSuccessComponent } from './components/submit-success/submit-success.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -44,9 +45,14 @@ import { SubmitSuccessComponent } from './components/submit-success/submit-succe
     MatDialogModule,
     QuillModule.forRoot(),
     HttpClientModule,
-
+    ToastrModule.forRoot(), 
   ],
-  providers: [ ],
+  providers: [ 
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+function provideAnimations(): import("@angular/core").Provider {
+  throw new Error('Function not implemented.');
+}
+

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-file-upload',
@@ -11,7 +12,12 @@ export class FileUploadComponent implements OnInit {
   @Output() uploading: EventEmitter<any> = new EventEmitter();
   files: any[] = [];
 
-  constructor() { }
+  public  validFileTypes = [
+      'application/pdf',
+      'application/msword',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+    ];
+  constructor(private toastr: ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -36,6 +42,7 @@ export class FileUploadComponent implements OnInit {
    */
   deleteFile(index: number) {
     this.files.splice(index, 1);
+    this.uploadedFiles.emit(this.files);
   }
 
   /**
@@ -66,6 +73,12 @@ export class FileUploadComponent implements OnInit {
     for (const item of files) {
       item.progress = 0;
       this.files.push(item);
+    // Check if file type is valid
+        if (this.validFileTypes.includes(item.type)) {
+          item.progress = 0;
+        } else {
+          this.toastr.error('Invalid file type. Only PDF and Word documents are allowed.');
+        }
     }
     this.uploadedFiles.emit(this.files);
     this.uploadFilesSimulator();
@@ -119,5 +132,9 @@ simulateFileUpload(index: number) {
   }, updateInterval);
 
 }
+
+  checkFileType(file): boolean {
+    return !this.validFileTypes.includes(file.type)
+  }
 
 }

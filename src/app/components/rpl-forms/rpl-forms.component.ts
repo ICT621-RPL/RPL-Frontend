@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import { FormBuilder,  Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-rpl-forms',
@@ -13,14 +16,17 @@ export class RplFormsComponent implements OnInit {
 
   months: string[]= []
   years: number[] = [];
-
+  files: File[]=[]
   public formFields;
   public form = this.fb.group({
         formArray: this.fb.array([
         ])
       });
   public closeResult = '';
-  constructor(private fb: FormBuilder, private router: Router) { 
+  constructor(private fb: FormBuilder, 
+              private router: Router, 
+              private httpClient: HttpClient, 
+              private toastr: ToastrService) { 
     this.formFields ={
       jobTitle: ['', Validators.required],
       company: ['', Validators.required],
@@ -55,7 +61,21 @@ export class RplFormsComponent implements OnInit {
   }
 
   public onSubmitFormGroup(): void {
-    this.router.navigate(['/upload'])
+    // if(this.form.valid) {
+    //    this.httpClient
+    //   .post(environment.api + 'experiences', this.formArray.value)
+    //   .subscribe(
+    //     (data: any) => {
+    //       console.log(data);
+          this.router.navigate(['/upload'])
+    //     },
+    //     (err) => console.log(err)
+    //   );
+    // }
+    // else {
+    //   this.toastr.error("Please fill all fields which are required")
+    // }
+  
   }
   
 
