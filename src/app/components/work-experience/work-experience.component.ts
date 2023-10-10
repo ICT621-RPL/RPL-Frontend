@@ -113,6 +113,7 @@ export class WorkExperienceComponent implements OnInit, OnChanges {
         this.toastr.info("You can select multiple courses to apply RPL.")
 
       }, 2000)
+      this.expForm.get('experience_id').setValue(data.experience.experience_id)
       data.recommendations.forEach((recommendation) => recommendation.selected = false)
       this.recommendations = data.recommendations
   }
@@ -120,7 +121,7 @@ export class WorkExperienceComponent implements OnInit, OnChanges {
   public onSelectRecommendation(event, courseId): void {
     const control  = this.expForm.get('courses');
     const recommendations = control.value;
-    const course = this.recommendations.filter(recommendation => recommendation.recommendation_unit_code === courseId)
+    const course = this.recommendations.filter(recommendation => recommendation.recommendation_id === courseId)
     course[0].selected = event.target.checked
     if(event.target.checked) {
       recommendations.push(courseId)
@@ -142,7 +143,7 @@ export class WorkExperienceComponent implements OnInit, OnChanges {
     }
     if(this.isAllSelected) {
      
-      control.setValue(recommendations.map((r)=> r.recommendation_unit_code ))
+      control.setValue(recommendations.map((r)=> r.recommendation_id ))
     }
     else {
      control.setValue([])

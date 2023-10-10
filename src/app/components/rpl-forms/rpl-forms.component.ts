@@ -16,7 +16,6 @@ export class RplFormsComponent implements OnInit {
 
   months: string[]= []
   years: number[] = [];
-  files: File[]=[]
   public formFields;
   public form = this.fb.group({
         formArray: this.fb.array([
@@ -36,7 +35,8 @@ export class RplFormsComponent implements OnInit {
       to_month: ['', Validators.required],
       to_year: ['', Validators.required],
       description: ['', Validators.required],
-      courses: [[]]
+      courses: [[]],
+      experience_id: ['']
     }
      this.formArray.push(this.fb.group(this.formFields));
   }
@@ -61,20 +61,22 @@ export class RplFormsComponent implements OnInit {
   }
 
   public onSubmitFormGroup(): void {
-    // if(this.form.valid) {
-    //    this.httpClient
-    //   .post(environment.api + 'experiences', this.formArray.value)
-    //   .subscribe(
-    //     (data: any) => {
-    //       console.log(data);
+    if(this.form.valid) {
+      //  this.httpClient
+      // .post(environment.api + 'experiences', this.formArray.value)
+      // .subscribe(
+      //   (data: any) => {
+      //     console.log(data);
           this.router.navigate(['/upload'])
-    //     },
-    //     (err) => console.log(err)
-    //   );
-    // }
-    // else {
-    //   this.toastr.error("Please fill all fields which are required")
-    // }
+      //   },
+      //   (err) => {
+      //       this.toastr.error(err.message)
+      //   }
+      // );
+    }
+    else {
+      this.toastr.error("Please fill all fields which are required")
+    }
   
   }
   
