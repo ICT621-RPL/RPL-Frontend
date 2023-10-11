@@ -121,7 +121,7 @@
                             </thead>
                         <tbody>
                             <tr *ngFor="let recommendation of recommendations">
-                                <th scope="row"><input  type="checkbox"  [checked]="recommendation.selected" (change)="onSelectRecommendation($event, recommendation.recommendation_unit_code)"></th>
+                                <th scope="row"><input  type="checkbox"  [checked]="recommendation.selected" (change)="onSelectRecommendation($event, recommendation.experience_id)"></th>
                                 <td>{{recommendation?.recommendation_unit_code}}</td>
                                 <td>1 Oct, 21</td>
                                 <td><i class="fa fa-check-circle-o green"></i><span class="ms-1">Paid</span></td>
