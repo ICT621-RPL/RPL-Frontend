@@ -1,4 +1,8 @@
-<div class="mt-3">
+
+<div class="loader-container" *ngIf="isLoading"  >
+  <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+</div>
+<div class="mt-3" *ngIf="!isLoading">
                 <label  class="form-label">Experices Certificates 
                     <span data-bs-toggle="tooltip" data-bs-placement="top" [title]="experienceUploadInfo"><i class="bi bi-info-circle" ></i>
                     </span>

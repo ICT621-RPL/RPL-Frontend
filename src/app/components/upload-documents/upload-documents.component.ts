@@ -15,6 +15,7 @@ export class UploadDocumentsComponent implements OnInit {
   public files: File[]=[];
   public applicationId: string;
   public applicationDate: string;
+  public isLoading: boolean = false;
 
   constructor(private router: Router,private httpClient: HttpClient, 
     private toastr: ToastrService, private activatedRoute: ActivatedRoute) {
@@ -36,7 +37,7 @@ export class UploadDocumentsComponent implements OnInit {
       formData.append('file', file);
     }
     this.httpClient.post(environment.api + 'upload', formData).subscribe((data: any) => {
-      this.router.navigate(['/submit'], {queryParams: {applicationId: this.applicationId, appDate: this.applicationDate}})
+      this.isLoading = true;
       this.onSubmitApplication();
     }, err => {
      this.toastr.error(err.error.error);
@@ -54,8 +55,11 @@ export class UploadDocumentsComponent implements OnInit {
 
   private onSubmitApplication(): void {
     this.httpClient.post(environment.api + 'application', {application_id: this.applicationId}).subscribe((response: any) => {
+        this.isLoading = false;
+        this.router.navigate(['/submit'], {queryParams: {applicationId: this.applicationId, appDate: this.applicationDate}})
         this.toastr.success(response.Message);
         }, error => {
+        this.isLoading = false;
         this.toastr.error(error.Message);
         })
   }
