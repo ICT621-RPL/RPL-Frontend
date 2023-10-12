@@ -89,13 +89,15 @@ export class WorkExperienceComponent implements OnInit, OnChanges {
   public onSubmitForm(): void {
     this.isLoading = true;
     this.http
-      .post(this.api + 'experience', { studentId: 1, ...this.expForm.value })
+      .post(this.api + 'experience', this.expForm.value )
       .subscribe(
         (data: any) => {
           this.experienceId = data?.experience_id
           this.setRecommendations(data);
         },
-        (err) => console.log(err)
+        (err) => {
+          this.toastr.error(err.message)
+        }
       );
     this.isLoading = false;
   }
@@ -109,7 +111,6 @@ export class WorkExperienceComponent implements OnInit, OnChanges {
       setTimeout(()=> {
         this.itemLoading = false;
         this.toastr.info("You can select multiple courses to apply RPL.")
-
       }, 2000)
       this.expForm.get('experience_id').setValue(data.experience.experience_id)
       data.recommendations.forEach((recommendation) => recommendation.selected = false)
@@ -133,12 +134,11 @@ export class WorkExperienceComponent implements OnInit, OnChanges {
   public onSelectAll(event, recommendations): void {
     this.isIndeterminate = false;
     const control  = this.expForm.get('courses');
-    this.isAllSelected = event.target.checked
+    this.isAllSelected = event.target.checked;
     for(let recommendation of recommendations) {
         recommendation.selected = this.isAllSelected;
     }
     if(this.isAllSelected) {
-     
       control.setValue(recommendations.map((r)=> r.experience_id ))
     }
     else {

@@ -122,7 +122,7 @@
                         <tbody>
                             <tr *ngFor="let recommendation of recommendations">
                                 <th scope="row"><input  type="checkbox"  [checked]="recommendation.selected" (change)="onSelectRecommendation($event, recommendation.experience_id)"></th>
-                                <td>{{recommendation?.recommendation_unit_code}}</td>
+                                <td><a href="https://handbook.murdoch.edu.au/search?q={{recommendation?.recommendation_unit_code}}" target="_blank">{{recommendation?.recommendation_unit_code}}</a></td>
                                 <td>1 Oct, 21</td>
                                 <td><i class="fa fa-check-circle-o green"></i><span class="ms-1">Paid</span></td>
                             </tr>

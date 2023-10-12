@@ -1,7 +1,22 @@
 <div class="form-container">
+ <form [formGroup]="form">
     <div class="form-content">
-                    <h2 class="fw-bold title-work-experience mb-3">Work Experiences</h2>
-        <form [formGroup]="form">
+            <div class="student-id-container mb-3">
+                <div>
+                    <label for="student-id" class="form-label">Murdoch Student ID*</label>
+                     <input type="text" id="student-id" formControlName="studentId" class="form-control" [class.is-invalid]="form.get('studentId')?.invalid && form.get('studentId')?.touched" >
+                     <div *ngIf="form.get('studentId')?.invalid && form.get('studentId')?.touched && form.get('studentId').errors.required" class="invalid-feedback">
+                        This field is required.
+                      </div>
+                        <div *ngIf="  form.get('studentId')?.touched && form.get('studentId')?.invalid  &&  form.get('studentId').errors.pattern" class="invalid-feedback">
+                            Student ID must be a number.
+                        </div>
+                    </div>
+                    <div></div>
+                </div>
+
+        <h2 class="fw-bold title-work-experience mb-3">Work Experiences</h2>
+       
                     <ng-container *ngFor="let control of formArray.controls; let i = index">
                         <div class="mb-3">
                             <app-work-experience [expForm]="control" [indexForm]="i" (onDelete)="onDeleteForm($event)"></app-work-experience>
@@ -17,7 +32,8 @@
                                     Next <i class="bi bi-arrow-right"></i>
                                 </button>
                             </div>
-        </form>
     </div>
+        </form>
+
 </div>
 

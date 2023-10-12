@@ -19,7 +19,8 @@ export class RplFormsComponent implements OnInit {
   files: File[]=[]
   public formFields;
   public form = this.fb.group({
-        formArray: this.fb.array([
+        studentId: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+        experiences: this.fb.array([
         ])
       });
   public closeResult = '';
@@ -47,7 +48,7 @@ export class RplFormsComponent implements OnInit {
 
 
   get formArray(): FormArray {
-    return this.form.get('formArray') as FormArray;
+    return this.form.get('experiences') as FormArray;
   }
   public addFormControl() {
     this.formArray.push(this.fb.control('', Validators.required));
@@ -62,9 +63,11 @@ export class RplFormsComponent implements OnInit {
   }
 
   public onSubmitFormGroup(): void {
+    let isCourseSelected = this.form.value['experiences'].some(d => d.courses.length > 0)
+    if (isCourseSelected) {
     if(this.form.valid) {
        this.httpClient
-      .post(environment.api + 'experiences', this.formArray.value)
+      .post(environment.api + 'experiences', this.form.value)
       .subscribe(
         (data: any) => {
           console.log(data);
@@ -78,7 +81,10 @@ export class RplFormsComponent implements OnInit {
     else {
       this.toastr.error("Please fill all fields which are required")
     }
-  
+    }
+    else {
+       this.toastr.error("Please select at least one course to move forward.")
+    }
   }
   
 

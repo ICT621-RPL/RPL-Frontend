@@ -19,7 +19,7 @@ export class UploadDocumentsComponent implements OnInit {
   constructor(private router: Router,private httpClient: HttpClient, 
     private toastr: ToastrService, private activatedRoute: ActivatedRoute) {
     this.isUploading = false;
-   this.experienceUploadInfo = "Upload your experience documents for applying the RPL"
+    this.experienceUploadInfo = "Upload your experience documents for applying the RPL"
    }
 
   ngOnInit(): void {
@@ -36,10 +36,9 @@ export class UploadDocumentsComponent implements OnInit {
       formData.append('file', file);
     }
     this.httpClient.post(environment.api + 'upload', formData).subscribe((data: any) => {
-      this.toastr.success(data.message);
-      this.router.navigate(['/submit'])
+      this.router.navigate(['/submit'], {queryParams: {applicationId: this.applicationId, appDate: this.applicationDate}})
+      this.onSubmitApplication();
     }, err => {
-      console.log(err)
      this.toastr.error(err.error.error);
     })
   }
@@ -51,5 +50,13 @@ export class UploadDocumentsComponent implements OnInit {
   uploadingDocument(isUploading): void {
     console.log(isUploading)
       this.isUploading = isUploading
+  }
+
+  private onSubmitApplication(): void {
+    this.httpClient.post(environment.api + 'application', {application_id: this.applicationId}).subscribe((response: any) => {
+        this.toastr.success(response.Message);
+        }, error => {
+        this.toastr.error(error.Message);
+        })
   }
 }
