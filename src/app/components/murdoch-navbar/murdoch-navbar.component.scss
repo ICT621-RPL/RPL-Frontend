@@ -4,7 +4,7 @@
         margin: 0 2rem;
     }
     .image-container {
-        background-color: #000000;
+        background-color: #1d1a1a;
         max-width: 100%;
         display: flex;
         justify-content: space-between;
@@ -31,7 +31,14 @@
         }
     }
     
-    .check-progress {
-        color: #ffffff
+    .navigations {
+        display: flex;
+        align-self: center;
+
+        .tracker{
+            margin-top: 10px;
+            color: #ffffff;
+            cursor: pointer;
+        }
     }
 }

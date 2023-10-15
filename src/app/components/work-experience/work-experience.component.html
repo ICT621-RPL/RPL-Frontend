@@ -43,7 +43,7 @@
                                     <option value="" disabled selected>Year</option>  
                                     <option *ngFor="let year of years" [value]="year">{{ year }}</option>
                                 </select>
-                                 <div *ngIf="expForm.get('from_month')?.invalid && expForm.get('from_month')?.touched" class="invalid-feedback">
+                                 <div *ngIf="expForm.get('from_year')?.invalid && expForm.get('from_year')?.touched" class="invalid-feedback">
                                     This field is required.
                                 </div>
                             </div>

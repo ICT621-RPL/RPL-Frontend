@@ -20,6 +20,7 @@ import { FileUploadComponent } from './components/file-upload/file-upload.compon
 import { UploadDocumentsComponent } from './components/upload-documents/upload-documents.component';
 import { SubmitSuccessComponent } from './components/submit-success/submit-success.component';
 import { ToastrModule } from 'ngx-toastr';
+import { ApplicationTrackerComponent } from './components/application-tracker/application-tracker.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +32,8 @@ import { ToastrModule } from 'ngx-toastr';
     ProgressComponent,
     FileUploadComponent,
     UploadDocumentsComponent,
-    SubmitSuccessComponent
+    SubmitSuccessComponent,
+    ApplicationTrackerComponent
   ],
   imports: [
     BrowserModule,
