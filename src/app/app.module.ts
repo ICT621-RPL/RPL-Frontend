@@ -21,6 +21,8 @@ import { UploadDocumentsComponent } from './components/upload-documents/upload-d
 import { SubmitSuccessComponent } from './components/submit-success/submit-success.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ApplicationTrackerComponent } from './components/application-tracker/application-tracker.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { ViewExperiencesComponent } from './components/view-experiences/view-experiences.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +35,9 @@ import { ApplicationTrackerComponent } from './components/application-tracker/ap
     FileUploadComponent,
     UploadDocumentsComponent,
     SubmitSuccessComponent,
-    ApplicationTrackerComponent
+    ApplicationTrackerComponent,
+    AdminDashboardComponent,
+    ViewExperiencesComponent
   ],
   imports: [
     BrowserModule,

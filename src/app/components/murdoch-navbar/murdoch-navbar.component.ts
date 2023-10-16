@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./murdoch-navbar.component.scss']
 })
 export class MurdochNavbarComponent implements OnInit {
-
+  @Input() isAdmin: boolean = false;
   constructor(private router: Router) { }
 
   ngOnInit(): void {

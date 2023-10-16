@@ -3,7 +3,7 @@
         <div class="image">
             <img src="https://myanswers.custhelp.com/euf/assets/images/murdoch-logo-hoz-white.svg" alt="No Image">
         </div>
-        <div class="navigations">
+        <div class="navigations" *ngIf="!isAdmin">
             <a (click)="onClickTracker()" class="tracker mr-5" >
                 Track Application Progress
             </a>
@@ -22,7 +22,7 @@
             </div>
         </div>
     </div>
-    <div class="topic-container">
+    <div class="topic-container" *ngIf="!isAdmin">
         <h1 class="topic-title">Advance standing Enquiry</h1>
     </div>
 </div>
