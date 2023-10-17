@@ -1,48 +1,12 @@
 <div  class="m-5">
     <h2 class="fw-bold">Experience Lists</h2>
 <div class="row" >
-    <div class="col-3 m-3 card" style="width: 18rem;">
+    <div *ngFor="let d of data" class="col-3 m-3 card" style="width: 18rem;">
         <div class="card-body">
-            <h2 class="card-title">Frontend Developer</h2>
-            <h5 class="small mb-2 text-muted">September 21, 2022</h5>
-            <p class="card-text">I was a software engineer back in my country and i was very talented ...</p>
-            <a (click)="onApplicationClick()" class="stretched-link">View..</a>
-        </div>
-    </div>
-
-    <div class="col-3 m-3  card" style="width: 18rem;">
-        <div class="card-body">
-            <h2 class="card-title">Backend Developer</h2>
-            <h5 class="small mb-2 text-muted">September 21, 2022</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="stretched-link">View..</a>
-        </div>
-    </div>
-
-
-    <div class=" col-3 m-3  card" style="width: 18rem;">
-        <div class="card-body">
-            <h2 class="card-title">3450965</h2>
-            <h5 class="small mb-2 text-muted">September 21, 2022</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="stretched-link">View..</a>
-        </div>
-    </div>
-
-     <div class=" col-3 m-3  card" style="width: 18rem;">
-        <div class="card-body">
-            <h2 class="card-title">3450965</h2>
-            <h5 class="small mb-2 text-muted">September 21, 2022</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="stretched-link">View..</a>
-        </div>
-    </div>
-    <div class=" col-3 m-3  card" style="width: 18rem;">
-        <div class="card-body">
-            <h2 class="card-title">3450965</h2>
-            <h5 class="small mb-2 text-muted">September 21, 2022</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="stretched-link">View..</a>
+            <h2 class="card-title">{{d.job_title}}</h2>
+            <h5 class="small mb-2 text-muted">{{formatDate(applicationDate)}}</h5>
+            <p class="card-text" [innerHTML]="d.description | truncate:100"></p>
+            <a (click)="onApplicationClick(d.experience_id)" class="stretched-link">View..</a>
         </div>
     </div>
 </div>

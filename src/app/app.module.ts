@@ -23,6 +23,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { ApplicationTrackerComponent } from './components/application-tracker/application-tracker.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { ViewExperiencesComponent } from './components/view-experiences/view-experiences.component';
+import { TruncatePipe } from './pipes/truncate.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +38,8 @@ import { ViewExperiencesComponent } from './components/view-experiences/view-exp
     SubmitSuccessComponent,
     ApplicationTrackerComponent,
     AdminDashboardComponent,
-    ViewExperiencesComponent
+    ViewExperiencesComponent,
+    TruncatePipe
   ],
   imports: [
     BrowserModule,

@@ -3,17 +3,23 @@
     <div class="tracker-id-container  m-3">
         <div class="job-title-container mb-3">
                             <label for="job-title" class="form-label">Application Id*</label>
-                            <input type="text" id="job-title"  class="form-control" placeholder="3514..">
+                            <input type="text" id="job-title" [(ngModel)]="applicationId" class="form-control" placeholder="3514..">
                         
         </div>
         <div>
-            <button class="btn btn-murdoch">Search</button>
+            <button class="btn btn-murdoch" (click)="onSearchApplication()">Search</button>
         </div>
 
     </div>
 
+         <div class="no-app m-3 p-2" *ngIf="data.length == 0">
+                <div class="text-center">
+                     <h2 class="text-black-50"><i class="bi bi-info-circle mr-2"></i>No Application Found!</h2>
+                                <p>Check your application Id or create an applications</p>
+                 </div>
+        </div>
 
-        <table class="table table-responsive table-borderless m-3">
+        <table class="table table-responsive table-borderless m-3" *ngIf="data.length !== 0">
                                 <thead>
                                     <tr class="bg-light">
                                         <th scope="col" width="20%">
@@ -25,35 +31,20 @@
                                     </tr>
                                 </thead>
                             <tbody>
-                                <tr >
-                                    <td >3456456</td>
+                                <tr *ngFor="let unit of units">
+                                    <td >{{unit.recommendation_unit_code}}</td>
                                     <td>Foundation Of Data Science</td>
-                                    <td><span class="badge badge-pill badge-primary">Granted</span></td>
-                                    <td>1 Oct, 21</td>
+                                    <td><span class="badge badge-pill"
+                                         [class.badge-primary]="unit.status_id == 5"
+                                          [class.badge-secondary]="unit.status_id == 3"
+                                          [class.badge-danger]="unit.status_id == 4"
+                                          [class.badge-info]="unit.status_id == 2" 
+                                         >{{getStatus(unit.status_id)}}</span></td>
+                                    <td>{{formatDate(applicationDate)}}</td>
 
                                 </tr>
-                                 <tr >
-                                    <td>3456456</td>
-                                    <td>Foundation Of Data Science</td>
-                                    <td><span class="badge badge-pill badge-secondary">In progress</span></td>
-                                    <td>1 Oct, 21</td>
-
-                                </tr>
-                                 <tr >
-                                    <td>3456456</td>
-                                    <td>Foundation Of Data Science</td>
-                                    <td><span class="badge badge-pill badge-danger">Rejected</span></td>
-                                    <td>1 Oct, 21</td>
-
-                                </tr>
-                                 <tr >
-                                    <td>3456456</td>
-                                    <td>Foundation Of Data Science</td>
-                                    <td><span class="badge badge-pill badge-info">Reviewing</span></td>
-                                    <td>1 Oct, 21</td>
-
-                                </tr>
-                    </tbody>
+                                
+                                </tbody>
                             </table>
 <!-- 
         <div class="wrapper m-3 ">

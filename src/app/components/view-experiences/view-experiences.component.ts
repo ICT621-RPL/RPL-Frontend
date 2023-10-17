@@ -1,4 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-view-experiences',
@@ -6,12 +10,70 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./view-experiences.component.scss']
 })
 export class ViewExperiencesComponent implements OnInit {
-
+  public isLoading;
+  public applicationId: string;
+  public data: any;
+  public expData: any;
+  public exp_id: number;
+  isStatusLoading: boolean = false;
   content = ""
-  constructor() { }
-
-  ngOnInit(): void {
-    this.content = "<div>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div> "
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: ToastrService) {
+    this.isLoading = true;
   }
 
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.exp_id = params['id']; // if your parameter is named 'id'
+    });
+    this.route.queryParams.subscribe(params => {
+      this.applicationId = params.application_id
+    })
+    this.getData();
+  }
+
+  filterExperienceData(data): void {
+    this.expData = data.experiences.filter(experience =>experience.experience_id == this.exp_id)[0]
+    this.content = this.expData.description
+    this.isLoading = false;
+  }
+
+  public onApprove(id): void {
+    this.isStatusLoading = true;
+    this.http.post(environment.api + 'transaction', {recommendation_id: id, status_id: 5}).subscribe(response => {
+             this.getData();
+          }, err => {
+            this.toastr.error(err.message)
+            this.isLoading = false;
+            this.isStatusLoading = false;
+
+          })
+  }
+
+  public onReject(id): void {
+    this.isStatusLoading = true;
+    this.http.post(environment.api + 'transaction', {recommendation_id: id, status_id: 4}).subscribe(response => {
+                  this.getData();
+              }, err => {
+                this.toastr.error(err.message)
+                this.isStatusLoading = false;
+
+              })
+  }
+
+  public getData(): void{
+    this.isStatusLoading = false;
+    setInterval(() => {
+     if(this.applicationId) {
+      this.http.get(environment.api + 'application/' + this.applicationId).subscribe(response => {
+          this.data = response
+          this.filterExperienceData(response)
+      }, err => {
+        this.toastr.error(err.message)
+        this.isLoading = false;
+      })
+    }
+    }   , 2000);
+
+
+}
 }

@@ -81,8 +81,8 @@ export class WorkExperienceComponent implements OnInit, OnChanges {
     
   }
 
-  onContentChange(value): void {
-    this.expForm.controls['description'].setValue(value.text.replace(/\n/g, ''));
+  onContentChange(change): void {
+    this.expForm.controls['description'].setValue(change.getText());
   }
 
 
@@ -121,14 +121,19 @@ export class WorkExperienceComponent implements OnInit, OnChanges {
     const control  = this.expForm.get('courses');
     const recommendations = control.value;
     if(event.target.checked) {
+      let unitRecommendation = this.recommendations.filter(recommendation => recommendation.recommendation_id == courseId)
+      unitRecommendation[0].selected = true; 
       recommendations.push(courseId)
     }
     else {
+      let unitRecommendation = this.recommendations.filter(recommendation => recommendation.recommendation_id == courseId)
+      unitRecommendation[0].selected = false; 
       recommendations.pop(courseId)
     }
     control.setValue(recommendations);
     this.isAllSelected = this.recommendations.every(recommendation => recommendation.selected)
     this.isIndeterminate = this.recommendations.some(item => item.selected) && !this.isAllSelected;
+    console.log(this.isIndeterminate)
   }
 
   public onSelectAll(event, recommendations): void {
