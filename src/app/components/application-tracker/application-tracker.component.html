@@ -35,10 +35,10 @@
                                     <td >{{unit.recommendation_unit_code}}</td>
                                     <td>{{unit.recommendation_unit_name}}</td>
                                     <td><span class="badge badge-pill"
-                                         [class.badge-primary]="unit.status_id == 5"
-                                          [class.badge-secondary]="unit.status_id == 3"
-                                          [class.badge-danger]="unit.status_id == 4"
-                                          [class.badge-info]="unit.status_id == 2" 
+                                         [class.badge-primary]="unit.status_id == 4"
+                                          [class.badge-secondary]="unit.status_id == 2"
+                                          [class.badge-danger]="unit.status_id == 3"
+                                          [class.badge-info]="unit.status_id == 1" 
                                          >{{getStatus(unit.status_id)}}</span></td>
                                     <td>{{formatDate(applicationDate)}}</td>
 

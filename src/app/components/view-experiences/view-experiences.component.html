@@ -25,11 +25,11 @@
                                                     <td>{{unit.recommendation_unit_code}}</td>
                                                     <td>{{unit.recommendation_unit_name}}</td>
                                                     <td>
-                                                            <ng-container *ngIf="unit.status_id == 4 || unit.status_id == 5 ; else btns">
-                                                                    <ng-container *ngIf="unit.status_id == 4">
+                                                            <ng-container *ngIf="unit.status_id == 3 || unit.status_id == 4 ; else btns">
+                                                                    <ng-container *ngIf="unit.status_id == 3">
                                                                         <span class="badge badge-pill badge-danger">Rejected</span>
                                                                     </ng-container>
-                                                                    <ng-container *ngIf="unit.status_id == 5">
+                                                                    <ng-container *ngIf="unit.status_id == 4">
                                                                         <span class="badge badge-pill badge-primary">Approved</span>
                                                                     </ng-container>
                                                                 </ng-container>

@@ -126,17 +126,17 @@ export class WorkExperienceComponent implements OnInit, OnChanges {
     if(event.target.checked) {
       let unitRecommendation = this.recommendations.filter(recommendation => recommendation.recommendation_id == courseId)
       unitRecommendation[0].selected = true; 
-      recommendations.push(courseId)
+      recommendations.push(unitRecommendation[0])
     }
     else {
       let unitRecommendation = this.recommendations.filter(recommendation => recommendation.recommendation_id == courseId)
       unitRecommendation[0].selected = false; 
-      recommendations.pop(courseId)
+      recommendations.pop(unitRecommendation[0])
     }
     control.setValue(recommendations);
     this.isAllSelected = this.recommendations.every(recommendation => recommendation.selected)
     this.isIndeterminate = this.recommendations.some(item => item.selected) && !this.isAllSelected;
-    console.log(this.isIndeterminate)
+
   }
 
   public onSelectAll(event, recommendations): void {
@@ -147,7 +147,7 @@ export class WorkExperienceComponent implements OnInit, OnChanges {
         recommendation.selected = this.isAllSelected;
     }
     if(this.isAllSelected) {
-      control.setValue(recommendations.map((r)=> r.experience_id ))
+      control.setValue(recommendations.map((r)=> r ))
     }
     else {
      control.setValue([])

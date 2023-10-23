@@ -40,7 +40,7 @@ export class ViewExperiencesComponent implements OnInit {
 
   public onApprove(id): void {
     this.isStatusLoading = true;
-    this.http.post(environment.api + 'transaction', {recommendation_id: id, status_id: 5}).subscribe(response => {
+    this.http.post(environment.api + 'transaction', {recommendation_id: id, status_id: 4}).subscribe(response => {
              this.getData();
           }, err => {
             this.toastr.error(err.message)
@@ -52,7 +52,7 @@ export class ViewExperiencesComponent implements OnInit {
 
   public onReject(id): void {
     this.isStatusLoading = true;
-    this.http.post(environment.api + 'transaction', {recommendation_id: id, status_id: 4}).subscribe(response => {
+    this.http.post(environment.api + 'transaction', {recommendation_id: id, status_id: 3}).subscribe(response => {
                   this.getData();
               }, err => {
                 this.toastr.error(err.message)
