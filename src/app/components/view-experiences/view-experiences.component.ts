@@ -15,6 +15,7 @@ export class ViewExperiencesComponent implements OnInit {
   public data: any;
   public expData: any;
   public exp_id: number;
+  public files: any;
   isStatusLoading: boolean = false;
   content = ""
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: ToastrService) {
@@ -62,7 +63,8 @@ export class ViewExperiencesComponent implements OnInit {
 
   public getData(): void{
     this.isStatusLoading = false;
-    setInterval(() => {
+    this.getFiles();
+    setTimeout(() => {
      if(this.applicationId) {
       this.http.get(environment.api + 'application/' + this.applicationId).subscribe(response => {
           this.data = response
@@ -72,8 +74,16 @@ export class ViewExperiencesComponent implements OnInit {
         this.isLoading = false;
       })
     }
-    }   , 2000);
+    } , 2000);
 
 
 }
+
+  public getFiles(): void {
+    this.http.get(environment.api + 'download/' + this.applicationId).subscribe(response => {
+          this.files = response
+      }, err => {
+        this.toastr.error(err.message)
+      })
+  }
 }

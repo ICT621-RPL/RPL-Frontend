@@ -25,7 +25,10 @@ export class WorkExperienceComponent implements OnInit, OnChanges {
   @ViewChild('fileInput') fileInput: ElementRef ;
   @Input() expForm: any;
   @Input() indexForm: number;
-  public recommendations: Array<{experience_id: number, is_applied: number, selected?: boolean, recommendation_id: number, recommendation_unit_code: string}> = [];
+  public recommendations: Array<{experience_id: number,
+     is_applied: number, selected?: boolean,
+      recommendation_id: number, recommendation_unit_code: string,recommendation_similarity:number,
+     recommendation_unit_name: string}> = [];
   public isLoading = false;
   public experienceId: number = 0;
   public itemLoading: boolean = false;

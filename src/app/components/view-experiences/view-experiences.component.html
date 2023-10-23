@@ -23,7 +23,7 @@
 
                                                 <tr *ngFor="let unit of expData?.recommendations" >
                                                     <td>{{unit.recommendation_unit_code}}</td>
-                                                    <td>Unit name</td>
+                                                    <td>{{unit.recommendation_unit_name}}</td>
                                                     <td>
                                                             <ng-container *ngIf="unit.status_id == 4 || unit.status_id == 5 ; else btns">
                                                                     <ng-container *ngIf="unit.status_id == 4">
@@ -44,27 +44,17 @@
                         </tbody>
                 </table>
             </div>
-            <div class="documents">
+            <div class="documents mb-5">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-6" *ngFor="let file of files">
                         <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">ManishCV.docx</h4>
+                            <h4 class="card-title">{{file.file_name}}</h4>
                             <p class="card-text">You can download a copy to your local computer.</p>
                             <a href="#" class="btn btn-danger"><i class="bi bi-download"></i></a>
                         </div>
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">ManishCover.pdf</h4>
-                            <p class="card-text">You can download a copy to your local computer.</p>
-                            <a href="#" class="btn btn-danger"><i class="bi bi-download"></i></a>
-                        </div>
-                        </div>
-                    </div>
-        </div>
-            </div>
+                </div>
         </div>
 </div>

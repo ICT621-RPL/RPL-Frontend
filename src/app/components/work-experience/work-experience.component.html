@@ -115,15 +115,15 @@
                                     </th>
                                     <th scope="col" width="10%">Unit code</th>
                                     <th scope="col" width="20%">Unit name</th>
-                                    <th scope="col" width="15%">Credit given</th>
+                                    <th scope="col" width="15%">Similarity</th>
                                 </tr>
                             </thead>
                         <tbody>
                             <tr *ngFor="let recommendation of recommendations">
                                 <th scope="row"><input  type="checkbox"  [checked]="recommendation.selected" (change)="onSelectRecommendation($event, recommendation.recommendation_id)"></th>
                                 <td><a href="https://handbook.murdoch.edu.au/search?q={{recommendation?.recommendation_unit_code}}" target="_blank">{{recommendation?.recommendation_unit_code}}</a></td>
-                                <td>1 Oct, 21</td>
-                                <td><i class="fa fa-check-circle-o green"></i><span class="ms-1">Paid</span></td>
+                                <td>{{recommendation?.recommendation_unit_name}}</td>
+                                <td><i class="fa fa-check-circle-o green"></i><span class="ms-1">{{recommendation?.recommendation_similarity}}%</span></td>
                             </tr>
                   </tbody>
                         </table>

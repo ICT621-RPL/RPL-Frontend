@@ -33,7 +33,7 @@
                             <tbody>
                                 <tr *ngFor="let unit of units">
                                     <td >{{unit.recommendation_unit_code}}</td>
-                                    <td>Foundation Of Data Science</td>
+                                    <td>{{unit.recommendation_unit_name}}</td>
                                     <td><span class="badge badge-pill"
                                          [class.badge-primary]="unit.status_id == 5"
                                           [class.badge-secondary]="unit.status_id == 3"
