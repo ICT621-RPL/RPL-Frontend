@@ -14,11 +14,10 @@ export class ApplicationTrackerComponent implements OnInit {
   public data: any = [];
   public units = []
   public status = {
-    1: "Not Applied",
-    2: "In progress",
-    3: "Viewed",
-    4: "Rejected",
-    5: "Approved"
+    1: "In progress",
+    2: "Viewed",
+    3: "Rejected",
+    4: "Approved"
   }
   public applicationDate: Date;
   constructor(private http: HttpClient, private toastr: ToastrService) { }
