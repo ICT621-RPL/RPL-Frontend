@@ -1,17 +1,50 @@
 <div class="form-container">
+     <div class="question ml-4">
+                <h4><strong>Are you a student of Murdoch University?</strong></h4>
+                <div class="d-flex">
+                    <div class="form-check">
+                        <input class="form-check-input" [(ngModel)]="isStudent"
+                          (ngModelChange)="isStudentChange($event)"  
+                        [value]="studentValue.student" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Yes
+                        </label>
+                    </div>
+                    <div class="form-check ml-3">
+                        <input class="form-check-input" [(ngModel)]="isStudent" 
+                          (ngModelChange)="isStudentChange($event)"  
+                        [value]="studentValue.notStudent" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            No
+                        </label>
+                    </div>
+                </div>
+            </div>
  <form [formGroup]="form">
     <div class="form-content">
+           
             <div class="student-id-container mb-3">
-                <div>
+                <div *ngIf="isStudent === studentValue.student">
                     <label for="student-id" class="form-label">Murdoch Student ID*</label>
-                     <input type="text" id="student-id" formControlName="studentId" class="form-control" [class.is-invalid]="form.get('studentId')?.invalid && form.get('studentId')?.touched" >
+                     <input type="text" placeholder="345096....." id="student-id" formControlName="studentId" class="form-control" [class.is-invalid]="form.get('studentId')?.invalid && form.get('studentId')?.touched" >
                      <div *ngIf="form.get('studentId')?.invalid && form.get('studentId')?.touched && form.get('studentId').errors.required" class="invalid-feedback">
                         This field is required.
                       </div>
-                        <div *ngIf="  form.get('studentId')?.touched && form.get('studentId')?.invalid  &&  form.get('studentId').errors.pattern" class="invalid-feedback">
+                        <div *ngIf="form.get('studentId')?.touched && form.get('studentId')?.invalid  &&  form.get('studentId').errors.pattern" class="invalid-feedback">
                             Student ID must be a number.
                         </div>
-                    </div>
+                </div>
+                <div *ngIf="isStudent !== studentValue.student">
+                    <label for="student-id" class="form-label">Email*</label>
+                     <input type="text" placeholder="johnsmith@outlook.com" id="student-id" formControlName="studentId" class="form-control" [class.is-invalid]="form.get('studentId')?.invalid && form.get('studentId')?.touched" >
+                     <div *ngIf="form.get('studentId')?.invalid && form.get('studentId')?.touched && form.get('studentId').errors.required" class="invalid-feedback">
+                        This field is required.
+                      </div>
+                        <div *ngIf="form.get('studentId')?.touched && form.get('studentId')?.invalid  &&  form.get('studentId').errors?.email" class="invalid-feedback">
+                           please enter valid email
+                        </div>
+                </div>
+
                     <div></div>
                 </div>
 

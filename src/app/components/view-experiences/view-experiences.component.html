@@ -14,7 +14,8 @@
                                         <tr class="bg-light">
                                             <th scope="col" width="10%">Unit code</th>
                                             <th scope="col" width="20%">Unit name</th>
-                                            <th scope="col" width="10%">Action</th>
+                                            <th scope="col" width="10%">Similarity</th>
+                                            <th scope="col" width="20%">Action</th>
                                         </tr>
                                     </thead>
                                 <tbody [class.table-body-loading]="isStatusLoading">
@@ -24,6 +25,7 @@
                                                 <tr *ngFor="let unit of expData?.recommendations" >
                                                     <td>{{unit.recommendation_unit_code}}</td>
                                                     <td>{{unit.recommendation_unit_name}}</td>
+                                                    <td>{{unit.recommendation_similarity}}</td>
                                                     <td>
                                                             <ng-container *ngIf="unit.status_id == 3 || unit.status_id == 4 ; else btns">
                                                                     <ng-container *ngIf="unit.status_id == 3">

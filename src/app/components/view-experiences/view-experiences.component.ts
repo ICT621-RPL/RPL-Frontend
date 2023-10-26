@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
@@ -18,7 +19,11 @@ export class ViewExperiencesComponent implements OnInit {
   public files: any;
   isStatusLoading: boolean = false;
   content = ""
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: ToastrService) {
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private http: HttpClient, 
+              public dialog: MatDialog,
+              private toastr: ToastrService) {
     this.isLoading = true;
   }
 

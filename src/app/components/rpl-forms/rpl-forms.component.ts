@@ -14,6 +14,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class RplFormsComponent implements OnInit {
 
+  isStudent = 1;
+  studentValue = {student: 1, notStudent: 0}
   months: string[]= []
   years: number[] = [];
   files: File[]=[]
@@ -95,5 +97,16 @@ export class RplFormsComponent implements OnInit {
     if(ids.experienceId) {
       console.log("deelete")
     }
+  }
+
+  public isStudentChange(value): void {
+     const controllerValue = this.form.get('studentId');
+    if(value !== this.studentValue.student) {
+      controllerValue.setValidators([Validators.required, Validators.email])
+    }
+    else {
+      controllerValue.setValidators([Validators.required, Validators.pattern('^[0-9]+$')])
+    }
+    controllerValue.updateValueAndValidity();
   }
 }
