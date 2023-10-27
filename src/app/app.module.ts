@@ -24,6 +24,7 @@ import { ApplicationTrackerComponent } from './components/application-tracker/ap
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { ViewExperiencesComponent } from './components/view-experiences/view-experiences.component';
 import { TruncatePipe } from './pipes/truncate.pipe';
+import { FeedbacksComponent } from './components/feedbacks/feedbacks.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +40,8 @@ import { TruncatePipe } from './pipes/truncate.pipe';
     ApplicationTrackerComponent,
     AdminDashboardComponent,
     ViewExperiencesComponent,
-    TruncatePipe
+    TruncatePipe,
+    FeedbacksComponent
   ],
   imports: [
     BrowserModule,

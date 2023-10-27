@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
+import { FeedbacksComponent } from '../feedbacks/feedbacks.component';
 
 @Component({
   selector: 'app-view-experiences',
@@ -44,8 +45,15 @@ export class ViewExperiencesComponent implements OnInit {
   }
 
   public onApprove(id): void {
-    this.isStatusLoading = true;
-    this.http.post(environment.api + 'transaction', {recommendation_id: id, status_id: 4}).subscribe(response => {
+    let dialogRef = this.dialog.open(FeedbacksComponent, {
+        height: '400px',
+        width: '600px',
+      });
+      dialogRef.afterClosed().subscribe((message) => {
+        if(message!==""){
+          this.isStatusLoading = true;
+
+         this.http.post(environment.api + 'transaction', {recommendation_id: id, status_id: 4, reason: message}).subscribe(response => {
              this.getData();
           }, err => {
             this.toastr.error(err.message)
@@ -53,17 +61,29 @@ export class ViewExperiencesComponent implements OnInit {
             this.isStatusLoading = false;
 
           })
+        }
+      })
+   
   }
 
   public onReject(id): void {
-    this.isStatusLoading = true;
-    this.http.post(environment.api + 'transaction', {recommendation_id: id, status_id: 3}).subscribe(response => {
-                  this.getData();
-              }, err => {
-                this.toastr.error(err.message)
-                this.isStatusLoading = false;
+    let dialogRef = this.dialog.open(FeedbacksComponent, {
+        height: '400px',
+        width: '600px',
+      });
+      dialogRef.afterClosed().subscribe((message) => {
+        if(message!==""){
+          this.isStatusLoading = true;
+          this.http.post(environment.api + 'transaction', {recommendation_id: id, status_id: 3,  reason: message}).subscribe(response => {
+                        this.getData();
+                    }, err => {
+                      this.toastr.error(err.message)
+                      this.isStatusLoading = false;
 
-              })
+                    })
+                  }
+      })
+
   }
 
   public getData(): void{
@@ -89,6 +109,16 @@ export class ViewExperiencesComponent implements OnInit {
           this.files = response
       }, err => {
         this.toastr.error(err.message)
+      })
+  }
+
+  public onActionChanged(): void {
+    let dialogRef = this.dialog.open(FeedbacksComponent, {
+        height: '400px',
+        width: '600px',
+      });
+      dialogRef.afterClosed().subscribe((d) => {
+        console.log(d)
       })
   }
 }

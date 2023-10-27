@@ -129,6 +129,24 @@
                         </table>
                 </div>
                         <div class="submission-btn-container mt-3">
+                            <div class="d-flex" *ngIf="enableUnits">
+                                <div class="mb-3">
+                                    <div class="company-container mr-2">
+                                        <label for="company-name" class="form-label">Unit Code</label>
+                                        <input  type="text"  id="company-name" class="form-control" [class.is-invalid]="expForm.get('company')?.invalid && expForm.get('company')?.touched" >
+
+                                    </div>
+                                    </div>
+                                <div class="mb-3 ml-2">
+                                    <div class="company-container mr-2">
+                                        <label for="company-name" class="form-label">Unit Name</label>
+                                        <input  type="text"  id="company-name" class="form-control" [class.is-invalid]="expForm.get('company')?.invalid && expForm.get('company')?.touched" >
+                                        <div *ngIf="expForm.get('company')?.invalid && expForm.get('company')?.touched" class="invalid-feedback">
+                                            This field is required.
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
                             <button type="button" [disabled]="!expForm.valid" class="btn btn-generate" (click)="onSubmitForm()">
                                 <span class="mr-1">Generate</span> 
                                 <div class="spinner-border" role="status" *ngIf="isLoading"></div> 
@@ -138,8 +156,9 @@
                                 <span class="mr-1">Delete</span> 
                                  <i class="bi bi-trash" *ngIf="!isLoading"></i>
                             </button>
+                           
+                        </div>
                         </div>
                     </div>
-                </div>
     </div>
 </form>

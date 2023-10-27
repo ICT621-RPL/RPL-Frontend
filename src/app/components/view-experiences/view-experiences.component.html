@@ -25,7 +25,7 @@
                                                 <tr *ngFor="let unit of expData?.recommendations" >
                                                     <td>{{unit.recommendation_unit_code}}</td>
                                                     <td>{{unit.recommendation_unit_name}}</td>
-                                                    <td>{{unit.recommendation_similarity}}</td>
+                                                    <td>{{unit.recommendation_similarity}}%</td>
                                                     <td>
                                                             <ng-container *ngIf="unit.status_id == 3 || unit.status_id == 4 ; else btns">
                                                                     <ng-container *ngIf="unit.status_id == 3">
@@ -39,6 +39,7 @@
                                                                     <button (click)="onApprove(unit.recommendation_id)" class="btn btn-primary btn-sm mr-2">Approve</button>
                                                                     <button (click)="onReject(unit.recommendation_id)" class="btn btn-danger btn-sm">Reject</button>
                                                                 </ng-template>
+
                                                     </td>
                                                 </tr>
                                             </ng-container>

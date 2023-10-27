@@ -48,4 +48,12 @@ export class AdminDashboardComponent implements OnInit {
 
     return `${monthNames[monthIndex]} ${day}, ${year}`;
 }
+
+  public onCompleteApplication(): void {
+    this.http.post(environment.api + "complete-application", {application_id: this.applicationId}).subscribe(response => {
+      this.toastr.success("Email sent to applicant.")
+    }, error => {
+      this.toastr.error(error.message)
+    })
+  }
 }

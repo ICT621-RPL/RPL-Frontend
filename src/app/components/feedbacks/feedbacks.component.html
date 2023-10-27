@@ -1,0 +1,14 @@
+<div>
+    <h2>Confirm Your Action</h2></div>
+<hr>
+<div class="message-container">
+    <div class="form-group">
+    <label for="exampleFormControlTextarea1">Reason</label>
+    <textarea class="form-control" [(ngModel)]="messages"  id="exampleFormControlTextarea1" rows="3" placeholder="Give a reason.."></textarea>
+  </div>
+</div>
+<hr>
+<div class="d-flex justify-content-end">
+    <button type="button" class="btn btn-warning" (click)="onCancle()">Cancel</button>
+    <button class="btn btn-primary ml-3" (click)="closeDialog()">Confirm</button>
+</div>

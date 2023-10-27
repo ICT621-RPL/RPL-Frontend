@@ -40,7 +40,9 @@ export class RplFormsComponent implements OnInit {
       to_year: ['', Validators.required],
       description: ['', Validators.required],
       courses: [[]],
-      experience_id: ['']
+      experience_id: [''],
+      unitName: [''],
+      unitCode: ['']
     }
      this.formArray.push(this.fb.group(this.formFields));
   }

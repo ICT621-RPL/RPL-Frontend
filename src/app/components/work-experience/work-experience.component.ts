@@ -25,6 +25,7 @@ export class WorkExperienceComponent implements OnInit, OnChanges {
   @ViewChild('fileInput') fileInput: ElementRef ;
   @Input() expForm: any;
   @Input() indexForm: number;
+  enableUnits: boolean = false;
   public recommendations: Array<{experience_id: number,
      is_applied: number, selected?: boolean,
       recommendation_id: number, recommendation_unit_code: string,recommendation_similarity:number,
@@ -90,6 +91,7 @@ export class WorkExperienceComponent implements OnInit, OnChanges {
 
 
   public onSubmitForm(): void {
+    this.enableUnits = true;
     this.isLoading = true;
     this.http
       .post(this.api + 'experience', this.expForm.value )
