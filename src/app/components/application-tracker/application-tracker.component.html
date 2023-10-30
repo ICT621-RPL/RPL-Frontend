@@ -26,8 +26,8 @@
                                           Unit Code
                                         </th>
                                         <th scope="col" width="20%">Unit Name</th>
-                                        <th scope="col" width="20%">Unit Name</th>
-                                        <th scope="col" width="10%">Application Date</th>
+                                        <th scope="col" width="10%">Status</th>
+                                        <th scope="col" width="20%">Reason</th>
                                     </tr>
                                 </thead>
                             <tbody>
@@ -40,7 +40,7 @@
                                           [class.badge-danger]="unit.status_id == 3"
                                           [class.badge-info]="unit.status_id == 1" 
                                          >{{getStatus(unit.status_id)}}</span></td>
-                                    <td>{{formatDate(applicationDate)}}</td>
+                                    <td>{{unit.reason}}</td>
 
                                 </tr>
                                 

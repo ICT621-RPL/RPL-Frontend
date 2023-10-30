@@ -93,7 +93,7 @@
                     <div class="experience-info-content" *ngIf="!isLoading">
                         <div class="no-experience p-2" *ngIf="recommendations.length == 0">
                             <div class="text-center">
-                                <h2 class="text-black-50"><i class="bi bi-info-circle mr-2"></i>No Recommedations Registered!</h2>
+                                <h2 class="text-black-50"><i class="bi bi-info-circle mr-2"></i>No Recommedations Available!</h2>
                                 <p>Add work experiences for course recommendations</p>
                             </div>
                         </div>
@@ -120,7 +120,7 @@
                             </thead>
                         <tbody>
                             <tr *ngFor="let recommendation of recommendations">
-                                <th scope="row"><input  type="checkbox"  [checked]="recommendation.selected" (change)="onSelectRecommendation($event, recommendation.recommendation_id)"></th>
+                                <th scope="row"><input  type="checkbox"  [checked]="recommendation.selected" (change)="onSelectRecommendation($event, recommendation.recommendation_unit_code)"></th>
                                 <td><a href="https://handbook.murdoch.edu.au/search?q={{recommendation?.recommendation_unit_code}}" target="_blank">{{recommendation?.recommendation_unit_code}}</a></td>
                                 <td>{{recommendation?.recommendation_unit_name}}</td>
                                 <td><i class="fa fa-check-circle-o green"></i><span class="ms-1">{{recommendation?.recommendation_similarity}}%</span></td>
@@ -133,20 +133,23 @@
                                 <div class="mb-3">
                                     <div class="company-container mr-2">
                                         <label for="company-name" class="form-label">Unit Code</label>
-                                        <input  type="text"  id="company-name" class="form-control" [class.is-invalid]="expForm.get('company')?.invalid && expForm.get('company')?.touched" >
+                                        <input  type="text" formControlName="unitCode"  id="company-name" class="form-control" [class.is-invalid]="expForm.get('unitCode')?.invalid && expForm.get('unitCode')?.touched" >
 
                                     </div>
                                     </div>
                                 <div class="mb-3 ml-2">
                                     <div class="company-container mr-2">
                                         <label for="company-name" class="form-label">Unit Name</label>
-                                        <input  type="text"  id="company-name" class="form-control" [class.is-invalid]="expForm.get('company')?.invalid && expForm.get('company')?.touched" >
-                                        <div *ngIf="expForm.get('company')?.invalid && expForm.get('company')?.touched" class="invalid-feedback">
-                                            This field is required.
-                                        </div>
+                                        <input  type="text" formControlName="unitName" id="company-name" class="form-control" [class.is-invalid]="expForm.get('unitName')?.invalid && expForm.get('unitCode')?.touched" >
                                     </div>
                                     </div>
                                 </div>
+
+                                <button type="button" *ngIf="enableUnits" class="btn btn-primary mb-5" (click)="onAddUnits()">
+                                    <span class="mr-1">Add Units</span> 
+                                    <div class="spinner-border" role="status" *ngIf="isLoading"></div> 
+                                    <i class="bi bi-plus-lg" *ngIf="!isLoading"></i>
+                                </button>
                             <button type="button" [disabled]="!expForm.valid" class="btn btn-generate" (click)="onSubmitForm()">
                                 <span class="mr-1">Generate</span> 
                                 <div class="spinner-border" role="status" *ngIf="isLoading"></div> 

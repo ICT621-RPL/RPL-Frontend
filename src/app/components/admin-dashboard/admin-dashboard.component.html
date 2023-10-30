@@ -10,7 +10,17 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <button class="btn btn-primary" (click)="onCompleteApplication()">Complete Application</button>
+<div class="row mt-5">
+    <div class="col-md-6">
+        <button class="btn btn-primary" (click)="onCompleteApplication()">
+            <span  *ngIf="!isComplete">Complete Application</span>
+            <div class="spinner-border ml-2" role="status" *ngIf="isLoading && !isComplete"></div> 
+            <span *ngIf="isComplete">
+                Completed
+                <i class="bi bi-check"></i>
+            </span>
+        </button>
+    </div>
+    <div class="col-md-6"></div>
 </div>
 </div>

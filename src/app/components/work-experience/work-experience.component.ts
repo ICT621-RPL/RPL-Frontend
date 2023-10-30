@@ -26,8 +26,8 @@ export class WorkExperienceComponent implements OnInit, OnChanges {
   @Input() expForm: any;
   @Input() indexForm: number;
   enableUnits: boolean = false;
-  public recommendations: Array<{experience_id: number,
-     is_applied: number, selected?: boolean,
+  public recommendations: Array<{experience_id?: number,
+     is_applied?: number, selected?: boolean,
       recommendation_id: number, recommendation_unit_code: string,recommendation_similarity:number,
      recommendation_unit_name: string}> = [];
   public isLoading = false;
@@ -53,6 +53,9 @@ export class WorkExperienceComponent implements OnInit, OnChanges {
     },
   };
 
+  unitCode = "";
+  unitName = "";
+
   constructor(private fb: FormBuilder, private http: HttpClient, private toastr: ToastrService) {
     const currentYear = new Date().getFullYear();
     const startYear = 1980;
@@ -77,12 +80,16 @@ export class WorkExperienceComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.expForm.valueChanges.subscribe((value: any) => {
-    });
+
+    this.expForm.get('unitCode').valueChanges.subscribe(d => {
+      this.unitCode = d 
+    })
+    this.expForm.get('unitName').valueChanges.subscribe(d => {
+      this.unitName = d 
+    })
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    
   }
 
   onContentChange(change): void {
@@ -93,6 +100,8 @@ export class WorkExperienceComponent implements OnInit, OnChanges {
   public onSubmitForm(): void {
     this.enableUnits = true;
     this.isLoading = true;
+
+   
     this.http
       .post(this.api + 'experience', this.expForm.value )
       .subscribe(
@@ -126,19 +135,19 @@ export class WorkExperienceComponent implements OnInit, OnChanges {
     const control  = this.expForm.get('courses');
     const recommendations = control.value;
     if(event.target.checked) {
-      let unitRecommendation = this.recommendations.filter(recommendation => recommendation.recommendation_id == courseId)
+      let unitRecommendation = this.recommendations.filter(recommendation => recommendation.recommendation_unit_code == courseId)
       unitRecommendation[0].selected = true; 
       recommendations.push(unitRecommendation[0])
     }
     else {
-      let unitRecommendation = this.recommendations.filter(recommendation => recommendation.recommendation_id == courseId)
+      let unitRecommendation = this.recommendations.filter(recommendation => recommendation.recommendation_unit_code == courseId)
       unitRecommendation[0].selected = false; 
       recommendations.pop(unitRecommendation[0])
     }
     control.setValue(recommendations);
     this.isAllSelected = this.recommendations.every(recommendation => recommendation.selected)
     this.isIndeterminate = this.recommendations.some(item => item.selected) && !this.isAllSelected;
-
+    console.log(recommendations)
   }
 
   public onSelectAll(event, recommendations): void {
@@ -156,4 +165,19 @@ export class WorkExperienceComponent implements OnInit, OnChanges {
     }
   }
 
+  public onAddUnits(): void {
+    const control  = this.expForm.get('courses');
+    const selectedCourses = control.value;
+    if (this.unitCode !== "" &&  this.unitName!=="") {
+      let course = {
+          recommendation_id: 0,
+         recommendation_unit_code: this.unitCode, 
+         recommendation_similarity: 0,
+        recommendation_unit_name: this.unitName,
+        selected: true
+      }
+      this.recommendations.push(course)
+      selectedCourses.push(course)
+    }
+  }
 }

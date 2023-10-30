@@ -13,6 +13,8 @@ export class AdminDashboardComponent implements OnInit {
   public applicationId: string;
   public applicationDate: Date;
   public data;
+  isLoading: boolean = false;
+  isComplete: boolean = false;
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: ToastrService) {}
   
   ngOnInit() {
@@ -50,9 +52,13 @@ export class AdminDashboardComponent implements OnInit {
 }
 
   public onCompleteApplication(): void {
+    this.isLoading = true;
     this.http.post(environment.api + "complete-application", {application_id: this.applicationId}).subscribe(response => {
+      this.isLoading = false;
+      this.isComplete = true;
       this.toastr.success("Email sent to applicant.")
     }, error => {
+      this.isLoading = false;
       this.toastr.error(error.message)
     })
   }
