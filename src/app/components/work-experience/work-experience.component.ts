@@ -169,15 +169,33 @@ export class WorkExperienceComponent implements OnInit, OnChanges {
     const control  = this.expForm.get('courses');
     const selectedCourses = control.value;
     if (this.unitCode !== "" &&  this.unitName!=="") {
-      let course = {
-          recommendation_id: 0,
-         recommendation_unit_code: this.unitCode, 
-         recommendation_similarity: 0,
-        recommendation_unit_name: this.unitName,
-        selected: true
+      if(!this.isUnitCodeInArray(this.unitCode, this.recommendations)) {
+        let course = {
+                recommendation_id: 0,
+              recommendation_unit_code: this.unitCode, 
+              recommendation_similarity: 0,
+              recommendation_unit_name: this.unitName,
+              selected: true
+            }
+            this.recommendations.push(course)
+            selectedCourses.push(course)
       }
-      this.recommendations.push(course)
-      selectedCourses.push(course)
+      else {
+        this.toastr.error("The Unit is already on the list")
+      }
     }
   }
+
+  private isUnitCodeInArray(unitCode, arrayOfObjects) {
+    console.log(arrayOfObjects)
+  // Loop through each object in the array
+  for (let obj of arrayOfObjects) {
+    // Check if the unit code exists in the object
+    if (obj.recommendation_unit_code == unitCode.toUpperCase()) {
+      return true; // Found the unit code
+    }
+  }
+  return false; // Did not find the unit code
+}
+
 }
