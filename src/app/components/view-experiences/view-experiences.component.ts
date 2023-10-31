@@ -112,6 +112,16 @@ export class ViewExperiencesComponent implements OnInit {
       })
   }
 
+  public getFile(filePath): void {
+    this.http.get(environment.api + 'get-file/' + filePath, {responseType: 'blob'}).subscribe((data: Blob) => {
+      const downloadURL = window.URL.createObjectURL(data);
+      const link = document.createElement('a');
+      link.href = downloadURL;
+      link.download = filePath;
+      link.click();
+    });
+  }
+
   public onActionChanged(): void {
     let dialogRef = this.dialog.open(FeedbacksComponent, {
         height: '400px',

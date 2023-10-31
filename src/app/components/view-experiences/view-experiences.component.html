@@ -54,7 +54,7 @@
                         <div class="card-body">
                             <h4 class="card-title">{{file.file_name}}</h4>
                             <p class="card-text">You can download a copy to your local computer.</p>
-                            <a href="#" class="btn btn-danger"><i class="bi bi-download"></i></a>
+                            <button type="button" (click)="getFile(file.file_path)" class="btn btn-danger"><i class="bi bi-download"></i></button>
                         </div>
                         </div>
                     </div>
