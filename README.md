@@ -1,3 +1,12 @@
+#Install node 12 
+This project was generated in node 12 
+
+# Run node install
+Make sure you are in the folder where package.json lives, run "npm install"
+
+# Install Angular 
+run  "npm install -g @angular/cli" to install angular 
+
 # RplFrontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.0.
@@ -25,3 +34,6 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice.
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+
