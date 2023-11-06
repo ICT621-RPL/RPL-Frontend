@@ -1,0 +1,167 @@
+<form [formGroup]="expForm">          
+
+<div class="recommendations-form-container">
+        <div class="form-content">
+                    <div class="job-title-container mb-3">
+                        <label for="job-title" class="form-label">Job title *</label>
+                        <input type="text" id="job-title" formControlName = "jobTitle"  class="form-control" [class.is-invalid]="expForm.get('jobTitle')?.invalid && expForm.get('jobTitle')?.touched" >
+                         <div *ngIf="expForm.get('jobTitle')?.invalid && expForm.get('jobTitle')?.touched" class="invalid-feedback">
+                            This field is required.
+                         </div>
+                    </div>
+                    <div class="country-company-container mb-3">
+                        <div class="company-container mr-2">
+                            <label for="company-name" class="form-label">Name of the Company *</label>
+                            <input  type="text" formControlName="company" id="company-name" class="form-control" [class.is-invalid]="expForm.get('company')?.invalid && expForm.get('company')?.touched" >
+                            <div *ngIf="expForm.get('company')?.invalid && expForm.get('company')?.touched" class="invalid-feedback">
+                                This field is required.
+                            </div>
+                        </div>
+                        <div class="country-container ">
+                            <label for="country-name" class="form-label">Country *</label>
+                            <input  type="text" formControlName="country" id="country-name" class="form-control" [class.is-invalid]="expForm.get('country')?.invalid && expForm.get('country')?.touched">
+                            <div *ngIf="expForm.get('country')?.invalid && expForm.get('country')?.touched" class="invalid-feedback">
+                                This field is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="from-date-container mb-3">
+                        <label for="month-date" class="form-label">From *</label>
+                        <div class="date-container">
+                            <div class="month-container">
+                                <select id="monthSelect" class="form-select" formControlName="from_month" [class.is-invalid]="expForm.get('from_month')?.invalid && expForm.get('from_month')?.touched">
+                                    <option value="" disabled selected>Month</option>  
+                                    <option *ngFor="let month of months" [value]="month">{{ month }}</option>
+                                </select>
+                                <div *ngIf="expForm.get('from_month')?.invalid && expForm.get('from_month')?.touched" class="invalid-feedback">
+                                    This field is required.
+                                </div>
+                            </div>
+                            <div class="year-container ml-2">
+                                  <select id="monthSelect" class="form-select" formControlName="from_year" [class.is-invalid]="expForm.get('from_year')?.invalid && expForm.get('from_year')?.touched">
+                                    <option value="" disabled selected>Year</option>  
+                                    <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+                                </select>
+                                 <div *ngIf="expForm.get('from_year')?.invalid && expForm.get('from_year')?.touched" class="invalid-feedback">
+                                    This field is required.
+                                </div>
+                            </div>
+                        </div>
+                         
+                    </div>
+                   
+                    <div class="to-date-container mb-3">
+                        
+                    <label for="to-date" class="form-label" >To *</label>
+                    <div class="date-container">
+                        <div class="month-container">
+                            <select id="monthSelect" class="form-select" formControlName="to_month"  [class.is-invalid]="expForm.get('to_month')?.invalid && expForm.get('to_month')?.touched">
+                                <option value="" disabled selected>Month </option>    
+                                <option *ngFor="let month of months" [value]="month">{{ month }}</option>
+                            </select>
+                               <div *ngIf="expForm.get('to_month')?.invalid && expForm.get('to_month')?.touched" class="invalid-feedback">
+                                    This field is required.
+                                </div>
+                        </div>
+                        <div class="year-container  ml-2">
+                            <select id="monthSelect" class="form-select" formControlName="to_year" [class.is-invalid]="expForm.get('to_year')?.invalid && expForm.get('to_year')?.touched">
+                                <option value="" disabled selected>Year </option>  
+                                <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+                            </select>
+                               <div *ngIf="expForm.get('to_year')?.invalid && expForm.get('to_year')?.touched" class="invalid-feedback">
+                                    This field is required.
+                                </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="description-container mt-4 mb-5">
+                        <label for="description" class="form-label">Description *</label>
+                        <quill-editor class="quill-editor"
+                                        id="description"
+                                        placeholder="Share your experience"
+                                        [modules]="quillConfig"
+                                        formControlName="description"
+                                    >
+                            </quill-editor>
+                    </div>
+                </div>
+                
+                <div class="work-experience mt-4 ml-3 ">
+                    <div class="spinner-border" role="status" *ngIf="isLoading"></div> 
+
+                    <div class="experience-info-content" *ngIf="!isLoading">
+                        <div class="no-experience p-2" *ngIf="recommendations.length == 0">
+                            <div class="text-center">
+                                <h2 class="text-black-50"><i class="bi bi-info-circle mr-2"></i>No Recommedations Available!</h2>
+                                <p>Add work experiences for course recommendations</p>
+                            </div>
+                        </div>
+                        
+                        <div class="table-responsive" *ngIf="recommendations.length > 0">
+                            <div class="no-experience p-2" *ngIf="itemLoading" >
+                                 <div class="text-center">
+                                    <div class="spinner">
+                                    <div class="dot1"></div>
+                                    <div class="dot2"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <table class="table table-responsive table-borderless"  *ngIf="!itemLoading">
+                            <thead>
+                                <tr class="bg-light">
+                                    <th scope="col" width="5%">
+                                        <input  type="checkbox" [checked]="isAllSelected" [indeterminate]="isIndeterminate" (change)="onSelectAll($event, recommendations)">
+                                    </th>
+                                    <th scope="col" width="10%">Unit code</th>
+                                    <th scope="col" width="20%">Unit name</th>
+                                    <th scope="col" width="15%">Similarity</th>
+                                </tr>
+                            </thead>
+                        <tbody>
+                            <tr *ngFor="let recommendation of recommendations">
+                                <th scope="row"><input  type="checkbox"  [checked]="recommendation.selected" (change)="onSelectRecommendation($event, recommendation.recommendation_unit_code)"></th>
+                                <td><a href="https://handbook.murdoch.edu.au/search?q={{recommendation?.recommendation_unit_code}}" target="_blank">{{recommendation?.recommendation_unit_code}}</a></td>
+                                <td>{{recommendation?.recommendation_unit_name}}</td>
+                                <td><i class="fa fa-check-circle-o green"></i><span class="ms-1">{{recommendation?.recommendation_similarity}}%</span></td>
+                            </tr>
+                  </tbody>
+                        </table>
+                </div>
+                        <div class="submission-btn-container mt-3">
+                            <div class="d-flex" *ngIf="enableUnits">
+                                <div class="mb-3">
+                                    <div class="company-container mr-2">
+                                        <label for="company-name" class="form-label">Unit Code</label>
+                                        <input  type="text" formControlName="unitCode"  id="company-name" class="form-control" [class.is-invalid]="expForm.get('unitCode')?.invalid && expForm.get('unitCode')?.touched" >
+
+                                    </div>
+                                    </div>
+                                <div class="mb-3 ml-2">
+                                    <div class="company-container mr-2">
+                                        <label for="company-name" class="form-label">Unit Name</label>
+                                        <input  type="text" formControlName="unitName" id="company-name" class="form-control" [class.is-invalid]="expForm.get('unitName')?.invalid && expForm.get('unitCode')?.touched" >
+                                    </div>
+                                    </div>
+                                </div>
+
+                                <button type="button" *ngIf="enableUnits" class="btn btn-primary mb-5" (click)="onAddUnits()">
+                                    <span class="mr-1">Add Units</span> 
+                                    <div class="spinner-border" role="status" *ngIf="isLoading"></div> 
+                                    <i class="bi bi-plus-lg" *ngIf="!isLoading"></i>
+                                </button>
+                            <button type="button" [disabled]="!expForm.valid" class="btn btn-generate" (click)="onSubmitForm()">
+                                <span class="mr-1">Generate</span> 
+                                <div class="spinner-border" role="status" *ngIf="isLoading"></div> 
+                                 <i class="bi bi-airplane-engines-fill" *ngIf="!isLoading"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger mt-3" (click)="onDeleteForm()">
+                                <span class="mr-1">Delete</span> 
+                                 <i class="bi bi-trash" *ngIf="!isLoading"></i>
+                            </button>
+                           
+                        </div>
+                        </div>
+                    </div>
+    </div>
+</form>

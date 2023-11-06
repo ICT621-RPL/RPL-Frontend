@@ -1,0 +1,74 @@
+<div class="mb-5">
+ 
+    <div class="tracker-id-container  m-3">
+        <div class="job-title-container mb-3">
+                            <label for="job-title" class="form-label">Application Id*</label>
+                            <input type="text" id="job-title" [(ngModel)]="applicationId" class="form-control" placeholder="3514..">
+                        
+        </div>
+        <div>
+            <button class="btn btn-murdoch" (click)="onSearchApplication()">Search</button>
+        </div>
+
+    </div>
+
+         <div class="no-app m-3 p-2" *ngIf="data.length == 0">
+                <div class="text-center">
+                     <h2 class="text-black-50"><i class="bi bi-info-circle mr-2"></i>No Application Found!</h2>
+                                <p>Check your application Id or create an applications</p>
+                 </div>
+        </div>
+
+        <table class="table table-responsive table-borderless m-3" *ngIf="data.length !== 0">
+                                <thead>
+                                    <tr class="bg-light">
+                                        <th scope="col" width="20%">
+                                          Unit Code
+                                        </th>
+                                        <th scope="col" width="20%">Unit Name</th>
+                                        <th scope="col" width="10%">Status</th>
+                                        <th scope="col" width="20%">Reason</th>
+                                    </tr>
+                                </thead>
+                            <tbody>
+                                <tr *ngFor="let unit of units">
+                                    <td >{{unit.recommendation_unit_code}}</td>
+                                    <td>{{unit.recommendation_unit_name}}</td>
+                                    <td><span class="badge badge-pill"
+                                         [class.badge-primary]="unit.status_id == 4"
+                                          [class.badge-secondary]="unit.status_id == 2"
+                                          [class.badge-danger]="unit.status_id == 3"
+                                          [class.badge-info]="unit.status_id == 1" 
+                                         >{{getStatus(unit.status_id)}}</span></td>
+                                    <td>{{unit.reason}}</td>
+
+                                </tr>
+                                
+                                </tbody>
+                            </table>
+<!-- 
+        <div class="wrapper m-3 ">
+        <div class="margin-area">
+            <div class="dot one">1</div>
+            <div class="dot two">2</div>
+            <div class="dot three">3</div>
+            <div class="dot four">4</div>
+            <div class="progress-bar first"></div>
+            <div class="progress-bar second"></div>
+            <div class="progress-bar third"></div>
+            <div class="message message-1">
+                Sent (In progress)
+            <div>
+            <div class="message message-2">Viewed<div>
+            <div class="message message-3">Reviewing<div>
+            <div class="message message-4">Approved/ Rejected<div>
+            
+        </div>
+            <div class="status">Your applications are viewed and reviewed by the <a href="#">Advance Standing Team </a></div>
+            <div class="status code">You can also email <a href="#"> Advance standing team</a> with your application id : <a href="#">345032</a>
+        </div> -->
+
+           <div class="mt-4">
+                <h3><strong>Please check your email to find out the units that are granted/ rejected.</strong> </h3>
+            </div>
+</div>

@@ -1,0 +1,63 @@
+<div class="loader-container" *ngIf="isLoading"  >
+  <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+</div>
+<div class="row"  *ngIf="!isLoading" >
+    
+        <div class="col-6 m-5">
+            <h2>{{expData?.job_title}} at {{expData?.company}} - {{expData?.country}} </h2>
+            <p class="text-muted"><strong>{{expData?.from_month}} {{expData?.from_year}} - {{expData?.to_month}} {{expData?.to_year}}  </strong></p>
+            <p class="content" [innerHTML]="content"></p>
+            <h4><strong>Unit Applied</strong></h4>
+            <div class="courses_applied">
+                <table class="table table-responsive table-borderless">
+                                    <thead>
+                                        <tr class="bg-light">
+                                            <th scope="col" width="10%">Unit code</th>
+                                            <th scope="col" width="20%">Unit name</th>
+                                            <th scope="col" width="10%">Similarity</th>
+                                            <th scope="col" width="20%">Action</th>
+                                        </tr>
+                                    </thead>
+                                <tbody [class.table-body-loading]="isStatusLoading">
+                                    <div class="spinner-border"  role="status" *ngIf="isStatusLoading"></div> 
+                                            <ng-container *ngIf="!isStatusLoading" >
+
+                                                <tr *ngFor="let unit of expData?.recommendations" >
+                                                    <td>{{unit.recommendation_unit_code}}</td>
+                                                    <td>{{unit.recommendation_unit_name}}</td>
+                                                    <td>{{unit.recommendation_similarity}}%</td>
+                                                    <td>
+                                                            <ng-container *ngIf="unit.status_id == 3 || unit.status_id == 4 ; else btns">
+                                                                    <ng-container *ngIf="unit.status_id == 3">
+                                                                        <span class="badge badge-pill badge-danger">Rejected</span>
+                                                                    </ng-container>
+                                                                    <ng-container *ngIf="unit.status_id == 4">
+                                                                        <span class="badge badge-pill badge-primary">Approved</span>
+                                                                    </ng-container>
+                                                                </ng-container>
+                                                                <ng-template #btns>
+                                                                    <button (click)="onApprove(unit.recommendation_id)" class="btn btn-primary btn-sm mr-2">Approve</button>
+                                                                    <button (click)="onReject(unit.recommendation_id)" class="btn btn-danger btn-sm">Reject</button>
+                                                                </ng-template>
+
+                                                    </td>
+                                                </tr>
+                                            </ng-container>
+                                    
+                        </tbody>
+                </table>
+            </div>
+            <div class="documents mb-5">
+                <div class="row">
+                    <div class="col-sm-6" *ngFor="let file of files">
+                        <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">{{file.file_name}}</h4>
+                            <p class="card-text">You can download a copy to your local computer.</p>
+                            <button type="button" (click)="getFile(file.file_path)" class="btn btn-danger"><i class="bi bi-download"></i></button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+</div>

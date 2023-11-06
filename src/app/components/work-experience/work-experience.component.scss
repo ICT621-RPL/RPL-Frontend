@@ -1,0 +1,204 @@
+.recommendations-form-container {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    gap: 20px; 
+    margin-top: 2rem;
+    .form-main-title {
+            font-size: large;
+            font-weight: bold;
+        }
+        .title-work-experience {
+                margin: 0;
+        }
+        .work-exp {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .month-container, .year-container {
+            width: 100%;
+        }
+
+        .submission-btn-container{
+            .btn.btn-generate {
+                background-color: #007d86;
+                border-color: #007d86;
+                color: #fff;
+                width: 100%;
+            }
+            .spinner-border {
+                height: 1rem !important;
+                width: 1rem !important;
+            }
+            .btn {
+                width: 100%
+            }
+
+        }
+          .date-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .experience-info-content {
+                .no-experience {
+                    background-color: #F9F9F9;
+                    width: 100%;
+                    height: 15rem;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+        }
+
+       .description-container {
+            height: 20rem;
+       }
+
+        .form-submission-btn-container {
+            display: flex;
+            justify-content: flex-end;
+            .btn.btn-primary {
+                background-color: #ad202e; // Change to your desired color
+                border-color: #ad202e;
+                color: #FFF;
+             }
+            .btn.btn-secondary {
+                background-color: #3d3a3a; // Change to your desired color
+                border-color: #3d3a3a;
+                color: #FFF;
+             }
+        }
+
+        .country-company-container {
+            display: flex;
+            justify-content: space-between;
+
+            .country-container {
+                width: 100%;
+            }
+            .company-container {
+                width: 100%;
+            }
+        }
+
+//             .file-upload-container {
+//                 margin-top: 2rem;
+//                 text-align: center;
+
+//                  .drop-zone {
+//             border: 2px dashed #ccc;
+//             padding: 20px;
+//             cursor: pointer;
+//             }
+
+//             ul {
+//             list-style-type: none;
+//             padding: 0;
+//             }
+
+//             li {
+//             margin: 5px 0;
+//              }
+
+//         }
+
+//         .dropzone{ 
+//             width: 450px;
+//             height: 200px; padding: 2rem;
+//             text-align: center;
+//             border: dashed 1px #979797;
+//             position: relative;
+//             margin: 0 auto;
+//             input {
+//             opacity: 0;
+//             position: absolute;
+//             z-index: 2; 
+//             width: 100%;
+//             height: 100%;
+//             top: 0;
+//             left: 0;
+//             }
+//             label {
+//             color: white; width: 183px; height: 44px; 
+//             border-radius: 2px;
+//             background-color: #007d86;
+//             padding: 8px 16px;
+//             }
+
+//             h3{font-size: 20px; font-weight: 600 ; color: #38424c;}
+                    
+// }        
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.spinner {
+  margin: 100px auto;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  text-align: center;
+  
+  -webkit-animation: sk-rotate 2.0s infinite linear;
+  animation: sk-rotate 2.0s infinite linear;
+}
+
+.dot1, .dot2 {
+  width: 60%;
+  height: 60%;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  background-color: #dc3545;
+  border-radius: 100%;
+  
+  -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+  animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.dot2 {
+  top: auto;
+  bottom: 0;
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+@-webkit-keyframes sk-rotate { 100% { -webkit-transform: rotate(360deg) }}
+@keyframes sk-rotate { 100% { transform: rotate(360deg); -webkit-transform: rotate(360deg) }}
+
+@-webkit-keyframes sk-bounce {
+  0%, 100% { -webkit-transform: scale(0.0) }
+  50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bounce {
+  0%, 100% { 
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 50% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
+
+
+
+
+
+
+
